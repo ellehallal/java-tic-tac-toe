@@ -7,13 +7,13 @@ public class Display {
         this.consoleWriter = consoleWriter;
     }
 
-    public void show_squares(List<String> squares) {
+    public void show_grid(Grid grid) {
         var squaresOutput =
-            squares.get(0) + " | " + squares.get(1) + " | " + squares.get(2) +
+            grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
             "\n---------\n" +
-            squares.get(3) + " | " + squares.get(4) + " | " + squares.get(5) +
+            grid.getSquare(3) + " | " + grid.getSquare(4) + " | " + grid.getSquare(5) +
             "\n---------\n" +
-            squares.get(6) + " | " + squares.get(7) + " | " + squares.get(8);
+            grid.getSquare(6) + " | " + grid.getSquare(7) + " | " + grid.getSquare(8);
         consoleWriter.println(squaresOutput);
     }
 }
