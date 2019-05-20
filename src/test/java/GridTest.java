@@ -27,7 +27,7 @@ class GridTest {
     }
 
     @Test
-    void editsStringInSquare() {
+    void replacesDataInSquare() {
         var squares = new ArrayList<>(Arrays.asList
                 ("1", "2", "3", "4", "5", "6", "7", "8", "9"));
         var grid = new Grid(squares);
@@ -36,5 +36,14 @@ class GridTest {
         grid.setSquare(0, data);
 
         assertEquals(grid.getSquare(0), data);
+    }
+
+    @Test
+    void returnsNumberOfSquares() {
+        var squares = new ArrayList<>(Arrays.asList
+                ("1", "2", "3", "4", "5", "6", "7", "8", "9"));
+        var grid = new Grid(squares);
+
+        assertEquals(grid.getSize(), 9);
     }
 }

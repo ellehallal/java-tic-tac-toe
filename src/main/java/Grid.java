@@ -18,4 +18,8 @@ public class Grid {
     public String setSquare(int index, String data) {
         return squares.set(index, data);
     }
+
+    public int getSize(){
+        return squares.size();
+    }
 }

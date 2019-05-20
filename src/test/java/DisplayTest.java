@@ -34,6 +34,18 @@ class DisplayTest {
         var display = new Display(consoleWriter);
 
         display.make_move();
-        assertEquals("Choose a position from 1-9:\n", output.toString());
+        assertEquals("Choose a position from 1 - 9:\n", output.toString());
+    }
+
+    @Test
+    void displaysInvalidMoveMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+        var expected = "Invalid move. Please try again.\n";
+
+        display.invalid_move();
+        assertEquals(expected, output.toString());
     }
 }

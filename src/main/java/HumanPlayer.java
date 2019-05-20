@@ -19,9 +19,21 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public int choose_move(Board board) {
-        display.make_move();
-        var move = scanner.nextInt();
+    public int chooseMove(Board board, String opponentMark) {
+        var move = 0;
+        move = validateMove();
+
+        while (board.moveValid(move, mark, opponentMark) == false) {
+            display.invalid_move();
+            move = validateMove();
+        }
         return move;
+    }
+
+    private int validateMove(){
+        display.make_move();
+        var input = scanner.nextLine();
+
+        return (input.matches("\\d+")) ? Integer.parseInt(input) : 0;
     }
 }

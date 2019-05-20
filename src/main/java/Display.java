@@ -16,7 +16,12 @@ public class Display {
     }
 
     public void make_move() {
-        var output = "Choose a position from 1-9:";
+        var output = "Choose a position from 1 - 9:";
+        consoleWriter.println(output);
+    }
+
+    public void invalid_move() {
+        var output = "Invalid move. Please try again.";
         consoleWriter.println(output);
     }
 }
