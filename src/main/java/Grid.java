@@ -14,4 +14,8 @@ public class Grid {
     public String getSquare(int index) {
         return squares.get(index);
     }
+
+    public String setSquare(int index, String data) {
+        return squares.set(index, data);
+    }
 }

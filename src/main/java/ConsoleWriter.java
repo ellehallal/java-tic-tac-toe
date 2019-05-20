@@ -7,11 +7,11 @@ public class ConsoleWriter {
         this.output = output;
     }
 
-    public ConsoleWriter(){
+    public ConsoleWriter() {
         this(System.out);
     }
 
-    public void println(String output){
+    public void println(String output) {
         this.output.println(output);
     }
 
