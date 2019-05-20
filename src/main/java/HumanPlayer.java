@@ -1,17 +1,13 @@
-import java.util.Scanner;
-
 public class HumanPlayer implements Player {
     private Display display;
     private String mark;
-    private Scanner scanner;
-
+    private InputValidator inputValidator;
 
     public HumanPlayer
-            (Display display, String mark, Scanner scanner) {
+            (Display display, String mark, InputValidator inputValidator) {
         this.display = display;
         this.mark = mark;
-        this.scanner = scanner;
-
+        this.inputValidator = inputValidator;
     }
 
     public String getMark() {
@@ -20,20 +16,20 @@ public class HumanPlayer implements Player {
 
     @Override
     public int chooseMove(Board board, String opponentMark) {
+        display.showGrid(board.getGrid());
         var move = 0;
         move = validateMove();
 
         while (board.moveValid(move, mark, opponentMark) == false) {
-            display.invalid_move();
+            display.invalidMoveMessage();
+            display.showGrid(board.getGrid());
             move = validateMove();
         }
         return move;
     }
 
-    private int validateMove(){
-        display.make_move();
-        var input = scanner.nextLine();
-
-        return (input.matches("\\d+")) ? Integer.parseInt(input) : 0;
+    private int validateMove() {
+        display.makeMoveMessage();
+        return inputValidator.validateMove();
     }
 }

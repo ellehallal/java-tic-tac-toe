@@ -5,7 +5,7 @@ public class Display {
         this.consoleWriter = consoleWriter;
     }
 
-    public void grid(Grid grid) {
+    public void showGrid(Grid grid) {
         var squaresOutput =
             grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
             "\n---------\n" +
@@ -15,13 +15,31 @@ public class Display {
         consoleWriter.println(squaresOutput);
     }
 
-    public void make_move() {
+    public void makeMoveMessage() {
         var output = "Choose a position from 1 - 9:";
         consoleWriter.println(output);
     }
 
-    public void invalid_move() {
+    public void invalidMoveMessage() {
         var output = "Invalid move. Please try again.";
+        consoleWriter.println(output);
+    }
+
+    public void outcomeMessage(String outcome) {
+        if (outcome == "tie") {
+            tieMessage();
+        } else {
+            winnerMessage(outcome);
+        }
+    }
+
+    private void tieMessage() {
+        var output = "It's a tie!";
+        consoleWriter.println(output);
+    }
+
+    private void winnerMessage(String winnersMark) {
+        var output = winnersMark + " is the winner!";
         consoleWriter.println(output);
     }
 }
