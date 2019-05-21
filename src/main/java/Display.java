@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Display {
     private ConsoleWriter consoleWriter;
 
@@ -7,7 +5,7 @@ public class Display {
         this.consoleWriter = consoleWriter;
     }
 
-    public void show_grid(Grid grid) {
+    public void grid(Grid grid) {
         var squaresOutput =
             grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
             "\n---------\n" +
@@ -15,5 +13,10 @@ public class Display {
             "\n---------\n" +
             grid.getSquare(6) + " | " + grid.getSquare(7) + " | " + grid.getSquare(8);
         consoleWriter.println(squaresOutput);
+    }
+
+    public void make_move() {
+        var output = "Choose a position from 1-9:";
+        consoleWriter.println(output);
     }
 }

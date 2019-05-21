@@ -8,4 +8,10 @@ public class Board {
     public Grid getGrid() {
         return grid;
     }
+
+    public void addMarkToGrid(int position, String mark) {
+        int index = position - 1;
+        grid.setSquare(index, mark);
+    }
+
 }
