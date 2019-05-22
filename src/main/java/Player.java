@@ -1,3 +1,4 @@
 public interface Player {
-    int choose_move(Board board);
+    int chooseMove(Board board, String opponentMark);
+    String getMark();
 }

@@ -11,8 +11,7 @@ public class ConsoleWriter {
         this(System.out);
     }
 
-    public void println(String output) {
-        this.output.println(output);
+    public void println(String toPrint) {
+        output.println(toPrint);
     }
-
 }
