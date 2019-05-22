@@ -67,7 +67,7 @@ class BoardTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var isWinningLine = board.winningLine("x");
+        var isWinningLine = board.isWinningPlayer("x");
 
         assertTrue(isWinningLine);
     }
@@ -78,7 +78,7 @@ class BoardTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var isWinningLine = board.winningLine("x");
+        var isWinningLine = board.isWinningPlayer("x");
 
         assertFalse(isWinningLine);
     }

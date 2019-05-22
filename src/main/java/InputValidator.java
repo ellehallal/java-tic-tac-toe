@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class InputValidator {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public InputValidator(Scanner scanner) {
         this.scanner = scanner;

@@ -13,7 +13,7 @@ public class Grid {
             {0, 4, 8},
             {2, 4, 6},
     };
-    private List<String> squares;
+    private final List<String> squares;
 
     public Grid(List<String> squares) {
         this.squares = new ArrayList<>(squares);
@@ -35,7 +35,7 @@ public class Grid {
         return squares.set(index, data);
     }
 
-    public int getSize(){
+    public int getSize() {
         return squares.size();
     }
 }

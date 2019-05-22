@@ -1,7 +1,7 @@
 import java.io.PrintStream;
 
 public class ConsoleWriter {
-    private PrintStream output;
+    private final PrintStream output;
 
     public ConsoleWriter(PrintStream output) {
         this.output = output;
