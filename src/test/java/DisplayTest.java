@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DisplayTest {
 
@@ -16,7 +16,7 @@ class DisplayTest {
         var display = new Display(consoleWriter);
 
         var squaresOutput =
-                "1 | 2 | 3\n---------\n4 | 5 | 6\n---------\n7 | 8 | 9\n";
+            "1 | 2 | 3\n---------\n4 | 5 | 6\n---------\n7 | 8 | 9\n";
         var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
 
@@ -44,9 +44,9 @@ class DisplayTest {
         var consoleWriter = new ConsoleWriter(new PrintStream(output));
         var display = new Display(consoleWriter);
 
-        display.invalidMoveMessage();
+        display.invalidMoveMessage("x");
 
-        assertEquals("Invalid move. Please try again.\n", output.toString());
+        assertEquals("Invalid move. Please try again, x.\n", output.toString());
     }
 
     @Test
@@ -72,5 +72,17 @@ class DisplayTest {
         display.outcomeMessage(winnersMark);
 
         assertEquals("x is the winner!\n", output.toString());
+    }
+
+    @Test
+    void displaysPlayerTurnMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.playerTurnMessage("x");
+
+        assertEquals("x, it's your turn.\n", output.toString());
     }
 }

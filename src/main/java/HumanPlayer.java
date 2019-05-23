@@ -4,7 +4,7 @@ public class HumanPlayer implements Player {
     private final InputValidator inputValidator;
 
     public HumanPlayer
-            (Display display, String mark, InputValidator inputValidator) {
+        (Display display, String mark, InputValidator inputValidator) {
         this.display = display;
         this.mark = mark;
         this.inputValidator = inputValidator;
@@ -17,10 +17,11 @@ public class HumanPlayer implements Player {
     @Override
     public int chooseMove(Board board, String opponentMark) {
         display.showGrid(board.getGrid());
+        display.playerTurnMessage(mark);
         var move = validateMove();
 
         while (!board.moveValid(move, mark, opponentMark)) {
-            display.invalidMoveMessage();
+            display.invalidMoveMessage(mark);
             display.showGrid(board.getGrid());
             move = validateMove();
         }

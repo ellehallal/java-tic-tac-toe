@@ -7,11 +7,11 @@ public class Display {
 
     public void showGrid(Grid grid) {
         var squaresOutput =
-                grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
-                        "\n---------\n" +
-                        grid.getSquare(3) + " | " + grid.getSquare(4) + " | " + grid.getSquare(5) +
-                        "\n---------\n" +
-                        grid.getSquare(6) + " | " + grid.getSquare(7) + " | " + grid.getSquare(8);
+            grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
+                "\n---------\n" +
+                grid.getSquare(3) + " | " + grid.getSquare(4) + " | " + grid.getSquare(5) +
+                "\n---------\n" +
+                grid.getSquare(6) + " | " + grid.getSquare(7) + " | " + grid.getSquare(8);
         consoleWriter.println(squaresOutput);
     }
 
@@ -20,8 +20,8 @@ public class Display {
         consoleWriter.println(output);
     }
 
-    public void invalidMoveMessage() {
-        var output = "Invalid move. Please try again.";
+    public void invalidMoveMessage(String mark) {
+        var output = "Invalid move. Please try again, " + mark + ".";
         consoleWriter.println(output);
     }
 
@@ -33,13 +33,19 @@ public class Display {
         }
     }
 
+    public void playerTurnMessage(String mark) {
+        var output = mark + ", it's your turn.";
+        consoleWriter.println(output);
+    }
+
     private void tieMessage() {
         var output = "It's a tie!";
         consoleWriter.println(output);
     }
 
-    private void winnerMessage(String winnersMark) {
-        var output = winnersMark + " is the winner!";
+    private void winnerMessage(String mark) {
+        var output = mark + " is the winner!";
         consoleWriter.println(output);
     }
+
 }
