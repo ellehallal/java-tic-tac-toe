@@ -1,6 +1,6 @@
 public class Controller {
-    private Game game;
-    private Display display;
+    private final Game game;
+    private final Display display;
 
     public Controller(Game game, Display display) {
         this.game = game;

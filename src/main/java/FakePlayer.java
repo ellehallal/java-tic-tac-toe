@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class FakePlayer implements Player {
-    public String mark;
+    private final String mark;
 
     public FakePlayer(String mark) {
         this.mark = mark;

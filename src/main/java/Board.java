@@ -1,8 +1,8 @@
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Board {
-    private Grid grid;
+    private final Grid grid;
 
     public Board(Grid grid) {
         this.grid = grid;
@@ -24,7 +24,7 @@ public class Board {
                 && squareAvailable(position, player1Mark, player2Mark);
     }
 
-    public boolean winningLine(String playerMark) {
+    public boolean isWinningPlayer(String playerMark) {
         var winner = false;
         var count = 0;
         var size = 0;
@@ -33,7 +33,7 @@ public class Board {
             size = combination.length;
 
             for (int index : combination) {
-                if (grid.getSquare(index) == playerMark) count += 1;
+                if (grid.getSquare(index).equals(playerMark)) count += 1;
                 if (count == size) winner = true;
             }
             count = 0;
@@ -43,12 +43,11 @@ public class Board {
 
     public boolean winningLineExists
             (String player1Mark, String player2Mark) {
-        return winningLine(player1Mark) || winningLine(player2Mark);
+        return isWinningPlayer(player1Mark) || isWinningPlayer(player2Mark);
     }
 
     public boolean full(String player1Mark, String player2Mark) {
-        var availableSquares = availableSquares(player1Mark, player2Mark);
-        return availableSquares.size() == 0;
+        return availableSquares(player1Mark, player2Mark).isEmpty();
     }
 
     public boolean complete(String player1Mark, String player2Mark) {
@@ -57,19 +56,14 @@ public class Board {
     }
 
     public List<String> availableSquares(String player1Mark, String player2Mark) {
-        List<String> availableSquares = new ArrayList<>();
-
-        for (String square : grid.getSquares()) {
-            if (square != player1Mark && square != player2Mark) {
-                availableSquares.add(square);
-            }
-        }
-        return availableSquares;
+        var squares = grid.getSquares();
+        return squares.stream()
+                .filter(square -> !square.equals(player1Mark) && !square.equals(player2Mark))
+                .collect(Collectors.toList());
     }
 
     private boolean squareAvailable
             (int position, String player1Mark, String player2Mark) {
-
         var index = position - 1;
         var square = grid.getSquare(index);
 
