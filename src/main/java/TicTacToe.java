@@ -1,5 +1,6 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class TicTacToe {
     public static void main(String[] args) {
@@ -8,13 +9,13 @@ public class TicTacToe {
         var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
         var board = new Board(grid);
-        var scanner = new Scanner(System.in);
-        var inputValidator = new InputValidator(scanner);
-        var player1 = new HumanPlayer(display, "x", inputValidator);
-        var player2 = new HumanPlayer(display, "o", inputValidator);
-        var game = new Game(board, player1, player2);
-        var controller = new Controller(game, display);
-
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+        var playerFactory = new PlayerFactory(display, inputValidator);
+        var gameFactory = new GameFactory(inputValidator, playerFactory, board);
+        
+        var controller = new Controller(gameFactory, display);
+        
         controller.playGame();
     }
 }

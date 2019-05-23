@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -10,14 +12,14 @@ class HumanPlayerTest {
 
     @Test
     void returnsMoveWhenValid() {
-        var input = "1";
-        var scanner = new Scanner(input);
+        System.setIn(new ByteArrayInputStream("1\n".getBytes()));
         var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
         var board = new Board(grid);
         var consoleWriter = new ConsoleWriter();
         var display = new Display(consoleWriter);
-        var inputValidator = new InputValidator(scanner);
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
         var humanPlayer = new HumanPlayer(display, "x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
@@ -28,7 +30,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsTakenOnTheBoard() {
         var simulatedInput = "1" + System.getProperty("line.separator")
-                + "3" + System.getProperty("line.separator");
+            + "3" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -37,18 +39,19 @@ class HumanPlayerTest {
         var board = new Board(grid);
         var consoleWriter = new ConsoleWriter();
         var display = new Display(consoleWriter);
-        var inputValidator = new InputValidator(scanner);
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
         var humanPlayer = new HumanPlayer(display, "x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
-        assertEquals( 3, move);
+        assertEquals(3, move);
     }
 
     @Test
     void returnsSecondInputWhenFirstIsNotWithinGridSize() {
         var simulatedInput = "10" + System.getProperty("line.separator")
-                + "9" + System.getProperty("line.separator");
+            + "9" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -57,7 +60,8 @@ class HumanPlayerTest {
         var board = new Board(grid);
         var consoleWriter = new ConsoleWriter();
         var display = new Display(consoleWriter);
-        var inputValidator = new InputValidator(scanner);
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
         var humanPlayer = new HumanPlayer(display, "x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
@@ -68,7 +72,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsNotANumber() {
         var simulatedUserInput = "c" + System.getProperty("line.separator")
-                + "7" + System.getProperty("line.separator");
+            + "7" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -77,7 +81,8 @@ class HumanPlayerTest {
         var board = new Board(grid);
         var consoleWriter = new ConsoleWriter();
         var display = new Display(consoleWriter);
-        var inputValidator = new InputValidator(scanner);
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
         var humanPlayer = new HumanPlayer(display, "x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");

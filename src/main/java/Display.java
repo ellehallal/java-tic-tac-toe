@@ -1,30 +1,30 @@
 public class Display {
     private final ConsoleWriter consoleWriter;
-
+    
     public Display(ConsoleWriter consoleWriter) {
         this.consoleWriter = consoleWriter;
     }
-
+    
     public void showGrid(Grid grid) {
         var squaresOutput =
-            grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
-                "\n---------\n" +
-                grid.getSquare(3) + " | " + grid.getSquare(4) + " | " + grid.getSquare(5) +
-                "\n---------\n" +
-                grid.getSquare(6) + " | " + grid.getSquare(7) + " | " + grid.getSquare(8);
+                grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
+                        "\n---------\n" +
+                        grid.getSquare(3) + " | " + grid.getSquare(4) + " | " + grid.getSquare(5) +
+                        "\n---------\n" +
+                        grid.getSquare(6) + " | " + grid.getSquare(7) + " | " + grid.getSquare(8);
         consoleWriter.println(squaresOutput);
     }
-
+    
     public void makeMoveMessage() {
         var output = "Choose a position from 1 - 9:";
         consoleWriter.println(output);
     }
-
+    
     public void invalidMoveMessage(String mark) {
         var output = "Invalid move. Please try again, " + mark + ".";
         consoleWriter.println(output);
     }
-
+    
     public void outcomeMessage(String outcome) {
         if (outcome.equals("tie")) {
             tieMessage();
@@ -32,20 +32,44 @@ public class Display {
             winnerMessage(outcome);
         }
     }
-
+    
     public void playerTurnMessage(String mark) {
         var output = mark + ", it's your turn.";
         consoleWriter.println(output);
     }
-
+    
+    public void computerIsThinkingMessage(String mark) {
+        var output = mark + ", is thinking...";
+        consoleWriter.println(output);
+    }
+    
+    public void playerSelectionMessage(int playerNumber) {
+        var output = "Please select player " + playerNumber + " (h = human, c = computer):";
+        consoleWriter.println(output);
+    }
+    
+    public void invalidPlayerSelectionMessage() {
+        var output = "Invalid player selection. Please try again.";
+        consoleWriter.println(output);
+    }
+    
+    public void playerMarkMessage(int playerNumber) {
+        var output = "Please select player " + playerNumber + "'s mark:";
+        consoleWriter.println(output);
+    }
+    
+    public void invalidPlayerMarkMessage() {
+        var output = "Invalid mark selection. Please try again, without digits.";
+        consoleWriter.println(output);
+    }
+    
     private void tieMessage() {
         var output = "It's a tie!";
         consoleWriter.println(output);
     }
-
+    
     private void winnerMessage(String mark) {
         var output = mark + " is the winner!";
         consoleWriter.println(output);
     }
-
 }
