@@ -17,8 +17,11 @@ class ControllerTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var simulatedInput = "h" + System.getProperty("line.separator") + "x" + System.getProperty("line.separator")
-            + "h" + System.getProperty("line.separator") + "o" + System.getProperty("line.separator") + "3" + System.getProperty("line.separator");
+        var simulatedInput = "h" + System.getProperty("line.separator")
+                + "x" + System.getProperty("line.separator")
+                + "h" + System.getProperty("line.separator")
+                + "o" + System.getProperty("line.separator")
+                + "3" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
@@ -43,8 +46,10 @@ class ControllerTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var simulatedInput = "h" + System.getProperty("line.separator") + "x" + System.getProperty("line.separator")
-            + "c" + System.getProperty("line.separator") + "o" + System.getProperty("line.separator");
+        var simulatedInput = "h" + System.getProperty("line.separator")
+                + "x" + System.getProperty("line.separator")
+                + "c" + System.getProperty("line.separator")
+                + "o" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);

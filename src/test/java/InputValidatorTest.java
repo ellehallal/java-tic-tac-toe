@@ -63,7 +63,7 @@ class InputValidatorTest {
     @Test
     void ifInputIsNothOrcItIsNotReturned() {
         var simulatedInput = "3" + System.getProperty("line.separator")
-            + "h" + System.getProperty("line.separator");
+                + "h" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var display = new Display(new ConsoleWriter());
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -78,14 +78,13 @@ class InputValidatorTest {
     @Test
     void returnsPlayersMarkIfItIsNotADigit() {
         var simulatedInput = "7" + System.getProperty("line.separator")
-            + "o" + System.getProperty("line.separator");
-        ;
+                + "o" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var display = new Display(new ConsoleWriter());
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
 
-        var playerSelection = inputValidator.validateMarkSelection(1);
+        var playerSelection = inputValidator.validateMarkSelection(1, "");
 
         assertEquals("o", playerSelection);
     }

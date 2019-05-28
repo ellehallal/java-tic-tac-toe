@@ -30,7 +30,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsTakenOnTheBoard() {
         var simulatedInput = "1" + System.getProperty("line.separator")
-            + "3" + System.getProperty("line.separator");
+                + "3" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -51,7 +51,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsNotWithinGridSize() {
         var simulatedInput = "10" + System.getProperty("line.separator")
-            + "9" + System.getProperty("line.separator");
+                + "9" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -72,7 +72,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsNotANumber() {
         var simulatedUserInput = "c" + System.getProperty("line.separator")
-            + "7" + System.getProperty("line.separator");
+                + "7" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
 
         var scanner = new Scanner(System.in);
