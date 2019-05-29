@@ -10,9 +10,7 @@ public class Controller {
 
     public void playGame() {
         game = createGame();
-        while (!game.over()) {
-            game.playMove();
-        }
+        while (!game.over()) game.playMove();
         endOfGame();
     }
 
@@ -21,8 +19,8 @@ public class Controller {
     }
 
     private void endOfGame() {
-        display.showGrid(game.board.getGrid());
         var outcome = game.outcome();
         display.outcomeMessage(outcome);
+        display.showGrid(game.board.getGrid());
     }
 }

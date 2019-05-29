@@ -1,11 +1,9 @@
 public class HumanPlayer implements Player {
-    private final Display display;
     private final String mark;
     private final InputValidator inputValidator;
 
     public HumanPlayer
-            (Display display, String mark, InputValidator inputValidator) {
-        this.display = display;
+            (String mark, InputValidator inputValidator) {
         this.mark = mark;
         this.inputValidator = inputValidator;
     }
@@ -16,20 +14,12 @@ public class HumanPlayer implements Player {
 
     @Override
     public int chooseMove(Board board, String opponentMark) {
-        display.showGrid(board.getGrid());
-        display.playerTurnMessage(mark);
-        var move = validateMove();
+        var grid = board.getGrid();
+        var move = inputValidator.validateMove(grid, mark, true);
 
         while (!board.moveValid(move, mark, opponentMark)) {
-            display.invalidMoveMessage(mark);
-            display.showGrid(board.getGrid());
-            move = validateMove();
+            move = inputValidator.validateMove(grid, mark, false);
         }
         return move;
-    }
-
-    private int validateMove() {
-        display.makeMoveMessage();
-        return inputValidator.validateMove();
     }
 }

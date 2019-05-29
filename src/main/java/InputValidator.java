@@ -10,7 +10,8 @@ public class InputValidator {
         this.display = display;
     }
 
-    public int validateMove() {
+    public int validateMove(Grid grid, String playersMark, boolean isValid) {
+        display.humanPlayerMessages(grid, playersMark, isValid);
         var input = getInput();
         return (input.matches("\\d+")) ? Integer.parseInt(input) : 0;
     }
@@ -18,7 +19,6 @@ public class InputValidator {
     public String validatePlayerSelection(int playerNumber) {
         display.playerSelectionMessage(playerNumber);
         var input = getInput().toLowerCase();
-
 
         while (!input.matches("h") && !input.matches("c")) {
             display.invalidPlayerSelectionMessage();
@@ -32,7 +32,8 @@ public class InputValidator {
     public String validateMarkSelection(int playerNumber, String otherPlayersMark) {
         display.playerMarkMessage(playerNumber);
         var input = getInput();
-        while (input.matches("\\d+") || input.matches("^\\s+$") || input.matches(otherPlayersMark)) {
+
+        while (isMarkSelectionInvalid(input, otherPlayersMark)) {
             display.invalidPlayerMarkMessage();
             display.playerMarkMessage(playerNumber);
             input = getInput();
@@ -42,6 +43,7 @@ public class InputValidator {
 
     private String getInput() {
         var input = "";
+
         try {
             input = bufferedReader.readLine();
         } catch (IOException e) {
@@ -49,5 +51,10 @@ public class InputValidator {
             consoleWriter.println("Trouble reading input: " + e);
         }
         return input;
+    }
+
+    private boolean isMarkSelectionInvalid(String input, String otherPlayersMark) {
+        return input.matches("\\d+") || input.matches(" ")
+                || input.matches("") || input.matches(otherPlayersMark);
     }
 }

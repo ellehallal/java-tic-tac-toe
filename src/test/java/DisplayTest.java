@@ -27,30 +27,6 @@ class DisplayTest {
     }
 
     @Test
-    void displaysMakeMoveMessage() {
-
-        var output = new ByteArrayOutputStream();
-        var consoleWriter = new ConsoleWriter(new PrintStream(output));
-        var display = new Display(consoleWriter);
-
-        display.makeMoveMessage();
-
-        assertEquals("Choose a position from 1 - 9:\n", output.toString());
-    }
-
-    @Test
-    void displaysInvalidMoveMessage() {
-
-        var output = new ByteArrayOutputStream();
-        var consoleWriter = new ConsoleWriter(new PrintStream(output));
-        var display = new Display(consoleWriter);
-
-        display.invalidMoveMessage("x");
-
-        assertEquals("Invalid move. Please try again, x.\n", output.toString());
-    }
-
-    @Test
     void displaysTieMessage() {
 
         var output = new ByteArrayOutputStream();
@@ -59,7 +35,7 @@ class DisplayTest {
 
         display.outcomeMessage("tie");
 
-        assertEquals("It's a tie!\n", output.toString());
+        assertEquals("It's a tie!\n\n", output.toString());
     }
 
     @Test
@@ -72,20 +48,9 @@ class DisplayTest {
 
         display.outcomeMessage(winnersMark);
 
-        assertEquals("x is the winner!\n", output.toString());
+        assertEquals("x is the winner!\n\n", output.toString());
     }
 
-    @Test
-    void displaysPlayerTurnMessage() {
-
-        var output = new ByteArrayOutputStream();
-        var consoleWriter = new ConsoleWriter(new PrintStream(output));
-        var display = new Display(consoleWriter);
-
-        display.playerTurnMessage("x");
-
-        assertEquals("x, it's your turn.\n", output.toString());
-    }
 
     @Test
     void displaysPlayerSelectionMessage() {
@@ -136,7 +101,7 @@ class DisplayTest {
     }
 
     @Test
-    void displaysComputerMessages() {
+    void displaysComputerPlayerMessages() {
 
         var output = new ByteArrayOutputStream();
         var consoleWriter = new ConsoleWriter(new PrintStream(output));
@@ -144,13 +109,47 @@ class DisplayTest {
         var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
 
-        display.computerMessages(grid, "x");
+        display.computerPlayerMessages(grid, "x");
 
         var outputString = output.toString();
 
         assertThat(outputString).contains("1 | 2 | 3\n");
         assertThat(outputString).contains("x, it's your turn.\n");
         assertThat(outputString).contains("Choose a position from 1 - 9:\n");
-        assertThat(outputString).contains("x, is thinking...\n");
+        assertThat(outputString).contains("x, is thinking...\n\n");
+    }
+
+    @Test
+    void displaysPlayerTurnMessageWhenTrue() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+        var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
+        var grid = new Grid(squares);
+
+        display.humanPlayerMessages(grid, "o", true);
+
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("o, it's your turn.\n");
+        assertThat(outputString).contains("Choose a position from 1 - 9:\n");
+    }
+
+    @Test
+    void displaysInvalidMoveMessageWhenFalse() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+        var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
+        var grid = new Grid(squares);
+
+        display.humanPlayerMessages(grid, "o", false);
+
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Invalid move. Please try again, o.\n");
+        assertThat(outputString).contains("Choose a position from 1 - 9:\n");
     }
 }

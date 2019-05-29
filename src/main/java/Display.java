@@ -6,7 +6,6 @@ public class Display {
     }
 
     public void showGrid(Grid grid) {
-        clearScreen();
         var squaresOutput =
                 grid.getSquare(0) + " | " + grid.getSquare(1) + " | " + grid.getSquare(2) +
                         "\n---------\n" +
@@ -16,28 +15,14 @@ public class Display {
         consoleWriter.println(squaresOutput);
     }
 
-    public void makeMoveMessage() {
-        var output = "Choose a position from 1 - 9:";
-        consoleWriter.println(output);
-    }
-
-    public void invalidMoveMessage(String mark) {
-        var output = "Invalid move. Please try again, " + mark + ".";
-        consoleWriter.println(output);
-        pause(1500);
-    }
 
     public void outcomeMessage(String outcome) {
+        clearScreen();
         if (outcome.equals("tie")) {
             tieMessage();
         } else {
             winnerMessage(outcome);
         }
-    }
-
-    public void playerTurnMessage(String mark) {
-        var output = mark + ", it's your turn.";
-        consoleWriter.println(output);
     }
 
     public void playerSelectionMessage(int playerNumber) {
@@ -62,15 +47,26 @@ public class Display {
         var output = "Invalid mark selection. Please try again.";
         consoleWriter.println(output);
         pause(1500);
+        clearScreen();
     }
 
-    public void computerMessages(Grid grid, String mark) {
-        showGrid(grid);
+    public void computerPlayerMessages(Grid grid, String mark) {
+        clearScreen();
         playerTurnMessage(mark);
+        showGrid(grid);
         makeMoveMessage();
-        pause(1000);
+        pause(1500);
         computerIsThinkingMessage(mark);
         pause(2000);
+    }
+
+    public void humanPlayerMessages(Grid grid, String playersMark, boolean isValid) {
+        clearScreen();
+        if (isValid) playerTurnMessage(playersMark);
+        if (!isValid) invalidMoveMessage(playersMark);
+
+        showGrid(grid);
+        makeMoveMessage();
     }
 
     private void pause(int milliSeconds) {
@@ -82,18 +78,35 @@ public class Display {
     }
 
     private void tieMessage() {
-        var output = "It's a tie!";
+        var output = "It's a tie!\n";
         consoleWriter.println(output);
     }
 
     private void winnerMessage(String mark) {
-        var output = mark + " is the winner!";
+        var output = mark + " is the winner!\n";
         consoleWriter.println(output);
     }
 
     private void computerIsThinkingMessage(String mark) {
-        var output = mark + ", is thinking...";
+        var output = mark + ", is thinking...\n";
         consoleWriter.println(output);
+    }
+
+    private void playerTurnMessage(String mark) {
+        var output = mark + ", it's your turn.";
+        consoleWriter.println(output);
+    }
+
+    private void makeMoveMessage() {
+        var output = "Choose a position from 1 - 9:";
+        consoleWriter.println(output);
+    }
+
+    private void invalidMoveMessage(String mark) {
+        var output = "Invalid move. Please try again, " + mark + ".";
+        consoleWriter.println(output);
+        pause(1500);
+        clearScreen();
     }
 
     private void clearScreen() {

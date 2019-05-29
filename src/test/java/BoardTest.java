@@ -111,7 +111,7 @@ class BoardTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var full = board.full("x", "o");
+        var full = board.isFull("x", "o");
 
         assertTrue(full);
     }
@@ -122,7 +122,7 @@ class BoardTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var full = board.full("x", "o");
+        var full = board.isFull("x", "o");
 
         assertFalse(full);
     }
@@ -133,7 +133,7 @@ class BoardTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var complete = board.complete("x", "o");
+        var complete = board.isComplete("x", "o");
 
         assertTrue(complete);
     }
@@ -144,7 +144,7 @@ class BoardTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var complete = board.complete("x", "o");
+        var complete = board.isComplete("x", "o");
 
         assertFalse(complete);
     }

@@ -15,7 +15,7 @@ class PlayerFactoryTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
         var playerFactory = new PlayerFactory(display, inputValidator);
-        var newPlayer = playerFactory.createPlayer("h", "x");
+        var newPlayer = playerFactory.createNewPlayer("h", "x");
 
         var isHumanPlayer = newPlayer.getClass().equals(HumanPlayer.class);
 
@@ -29,7 +29,7 @@ class PlayerFactoryTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
         var playerFactory = new PlayerFactory(display, inputValidator);
-        var newPlayer = playerFactory.createPlayer("c", "x");
+        var newPlayer = playerFactory.createNewPlayer("c", "x");
 
         var isComputerPlayer = newPlayer.getClass().equals(ComputerPlayer.class);
 

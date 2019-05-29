@@ -20,6 +20,6 @@ public class GameFactory {
     private Player createPlayer(int playerNumber, String otherPlayersMark) {
         var playerType = inputValidator.validatePlayerSelection(playerNumber);
         var playerMark = inputValidator.validateMarkSelection(playerNumber, otherPlayersMark);
-        return playerFactory.createPlayer(playerType, playerMark);
+        return playerFactory.createNewPlayer(playerType, playerMark);
     }
 }

@@ -20,7 +20,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
@@ -41,7 +41,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
@@ -62,7 +62,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
@@ -83,7 +83,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 

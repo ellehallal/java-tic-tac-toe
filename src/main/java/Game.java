@@ -28,7 +28,7 @@ public class Game {
     }
 
     public boolean over() {
-        return board.full(currentPlayersMark(), opponentsMark()) ||
+        return board.isFull(currentPlayersMark(), opponentsMark()) ||
                 board.winningLineExists(currentPlayersMark(), opponentsMark());
     }
 
