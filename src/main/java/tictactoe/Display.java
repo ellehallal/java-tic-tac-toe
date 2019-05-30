@@ -22,7 +22,7 @@ public class Display {
 
     public void outcomeMessage(String outcome) {
         clearScreen();
-        if (outcome.equals("TIE")) {
+        if (outcome.equals("tie")) {
             tieMessage();
         } else {
             winnerMessage(outcome);
@@ -31,7 +31,7 @@ public class Display {
 
     public void playerSelectionMessage(int playerNumber) {
         clearScreen();
-        var output = "Please select player " + playerNumber + " (h = human, c = computer):";
+        var output = "Please select player " + playerNumber + "\n(h = human, c = computer, uc = unbeatable computer):";
         consoleWriter.println(output);
     }
 
@@ -43,7 +43,7 @@ public class Display {
 
     public void playerMarkMessage(int playerNumber) {
         clearScreen();
-        var output = "Please select player " + playerNumber + "'s move:";
+        var output = "Please select player " + playerNumber + "'s mark:";
         consoleWriter.println(output);
     }
 
@@ -91,7 +91,7 @@ public class Display {
     }
 
     private void tieMessage() {
-        var output = "It's a TIE!\n";
+        var output = "It's a tie!\n";
         consoleWriter.println(output);
     }
 

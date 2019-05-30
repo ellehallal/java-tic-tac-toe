@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -161,5 +162,17 @@ class BoardTest {
         var availableSquares = board.availableSquares("x", "o");
 
         assertEquals(expectedSquares, availableSquares);
+    }
+
+    @Test
+    void returnsANewInstanceOfBoard() {
+        var squares = Arrays.asList("x", "o", "x", "4", "o", "o", "7", "x", "x");
+        var grid = new Grid(squares);
+        var board = new Board(grid);
+
+        var copyBoard = board.copyBoard();
+
+        assertNotEquals(board, copyBoard);
+        assertThat(copyBoard).isInstanceOf(Board.class);
     }
 }

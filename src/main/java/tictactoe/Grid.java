@@ -40,4 +40,15 @@ public class Grid {
     public int getSize() {
         return squares.size();
     }
+
+    public Grid copyGrid() {
+        var squares = copySquares();
+        return new Grid(squares);
+    }
+
+    private List<String> copySquares() {
+        List<String> copy = new ArrayList<>();
+        copy.addAll(squares);
+        return copy;
+    }
 }

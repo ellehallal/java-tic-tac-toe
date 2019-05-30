@@ -1,7 +1,7 @@
 package tictactoe;
 
 public enum GameOutcome {
-    TIE("TIE");
+    TIE("tie");
 
     public final String type;
 

@@ -16,7 +16,8 @@ class PlayerFactoryTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var playerFactory = new PlayerFactory(display, inputValidator);
+        var minimax = new Minimax();
+        var playerFactory = new PlayerFactory(display, inputValidator, minimax);
         var newPlayer = playerFactory.createNewPlayer("h", "x");
 
         var isHumanPlayer = newPlayer.getClass().equals(HumanPlayer.class);
@@ -30,11 +31,27 @@ class PlayerFactoryTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var playerFactory = new PlayerFactory(display, inputValidator);
+        var minimax = new Minimax();
+        var playerFactory = new PlayerFactory(display, inputValidator, minimax);
         var newPlayer = playerFactory.createNewPlayer("c", "x");
 
         var isComputerPlayer = newPlayer.getClass().equals(ComputerPlayer.class);
 
         assertTrue(isComputerPlayer);
+    }
+
+    @Test
+    void createsAnUnbeatableComputerPlayer() {
+        var consoleWriter = new ConsoleWriter();
+        var display = new Display(consoleWriter);
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+        var minimax = new Minimax();
+        var playerFactory = new PlayerFactory(display, inputValidator, minimax);
+        var newPlayer = playerFactory.createNewPlayer("u", "x");
+
+        var isUnbeatableComputerPlayer = newPlayer.getClass().equals(UnbeatableComputerPlayer.class);
+
+        assertTrue(isUnbeatableComputerPlayer);
     }
 }

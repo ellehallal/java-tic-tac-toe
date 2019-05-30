@@ -22,7 +22,7 @@ public class InputValidator {
         display.playerSelectionMessage(playerNumber);
         var input = getInput().toLowerCase();
 
-        while (!input.matches(PlayerTypes.HUMAN.type) && !input.matches(PlayerTypes.COMPUTER.type)) {
+        while (isNotAValidPlayerType(input)) {
             display.invalidPlayerSelectionMessage();
             display.playerSelectionMessage(playerNumber);
 
@@ -60,5 +60,11 @@ public class InputValidator {
                 || input.matches(InvalidPlayerMarks.WHITESPACE.mark)
                 || input.matches(InvalidPlayerMarks.EMPTY.mark)
                 || input.matches(otherPlayersMark);
+    }
+
+    private boolean isNotAValidPlayerType(String input) {
+        return (!input.matches(PlayerTypes.HUMAN.type)
+                && !input.matches(PlayerTypes.COMPUTER.type)
+                && !input.matches(PlayerTypes.UNBEATABLE.type));
     }
 }
