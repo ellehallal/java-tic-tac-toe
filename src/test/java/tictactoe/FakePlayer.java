@@ -1,3 +1,5 @@
+package tictactoe;
+
 import java.util.Random;
 
 public class FakePlayer implements Player {

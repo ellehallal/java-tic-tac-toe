@@ -1,3 +1,5 @@
+package tictactoe;
+
 public class GameFactory {
     private final InputValidator inputValidator;
     private final PlayerFactory playerFactory;
