@@ -10,8 +10,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GameFactoryTest {
     @Test
     void createsANewInstanceOfGame() {
-        var simulatedInput = "h" + System.getProperty("line.separator") + "x" + System.getProperty("line.separator")
-            + "c" + System.getProperty("line.separator") + "o" + System.getProperty("line.separator");
+        var simulatedInput = "h" + System.getProperty("line.separator")
+                + "x" + System.getProperty("line.separator")
+                + "c" + System.getProperty("line.separator")
+                + "o" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));

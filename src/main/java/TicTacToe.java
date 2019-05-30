@@ -13,9 +13,9 @@ public class TicTacToe {
         var inputValidator = new InputValidator(bufferedReader, display);
         var playerFactory = new PlayerFactory(display, inputValidator);
         var gameFactory = new GameFactory(inputValidator, playerFactory, board);
-        
+
         var controller = new Controller(gameFactory, display);
-        
+
         controller.playGame();
     }
 }

@@ -20,7 +20,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
@@ -30,7 +30,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsTakenOnTheBoard() {
         var simulatedInput = "1" + System.getProperty("line.separator")
-            + "3" + System.getProperty("line.separator");
+                + "3" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -41,7 +41,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
@@ -51,7 +51,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsNotWithinGridSize() {
         var simulatedInput = "10" + System.getProperty("line.separator")
-            + "9" + System.getProperty("line.separator");
+                + "9" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -62,7 +62,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
@@ -72,7 +72,7 @@ class HumanPlayerTest {
     @Test
     void returnsSecondInputWhenFirstIsNotANumber() {
         var simulatedUserInput = "c" + System.getProperty("line.separator")
-            + "7" + System.getProperty("line.separator");
+                + "7" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
 
         var scanner = new Scanner(System.in);
@@ -83,7 +83,7 @@ class HumanPlayerTest {
         var display = new Display(consoleWriter);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var humanPlayer = new HumanPlayer(display, "x", inputValidator);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
 
         var move = humanPlayer.chooseMove(board, "o");
 
