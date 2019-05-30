@@ -1,3 +1,5 @@
+package tictactoe;
+
 public class Game {
     private Player currentPlayer;
     private Player opponent;
@@ -36,7 +38,7 @@ public class Game {
         if (board.winningLineExists(currentPlayersMark(), opponentsMark())) {
             return winner();
         } else {
-            return "tie";
+            return GameOutcome.TIE.type;
         }
     }
 

@@ -1,3 +1,5 @@
+package tictactoe;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -117,7 +119,7 @@ class GameTest {
 
         var gameOutcome = game.outcome();
 
-        assertEquals("tie", gameOutcome);
+        assertEquals("TIE", gameOutcome);
     }
 
     @Test

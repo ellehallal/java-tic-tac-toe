@@ -1,3 +1,5 @@
+package tictactoe;
+
 public class PlayerFactory {
     private final Display display;
     private final InputValidator inputValidator;
@@ -9,7 +11,7 @@ public class PlayerFactory {
     }
 
     public Player createNewPlayer(String playerType, String mark) {
-        if (playerType.equals("h")) {
+        if (playerType.equals(PlayerTypes.HUMAN.type)) {
             return new HumanPlayer(mark, inputValidator);
         } else {
             return new ComputerPlayer(display, mark);
