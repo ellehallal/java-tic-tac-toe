@@ -84,6 +84,34 @@ class InputValidatorTest {
     }
 
     @Test
+    void returnsUserInputIfItIsuc() {
+        var simulatedInput = "uc" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var playerSelection = inputValidator.validatePlayerSelection(1);
+
+        assertEquals("uc", playerSelection);
+    }
+
+    @Test
+    void ifInputIsNotucItIsNotReturned() {
+        var simulatedInput = "3" + System.getProperty("line.separator")
+                + "uc" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var playerSelection = inputValidator.validatePlayerSelection(1);
+
+        assertNotEquals("3", playerSelection);
+        assertEquals("uc", playerSelection);
+    }
+
+    @Test
     void returnsPlayersMarkIfInputIsNotADigit() {
         var simulatedInput = "7" + System.getProperty("line.separator")
                 + "o" + System.getProperty("line.separator");

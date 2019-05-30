@@ -22,7 +22,8 @@ class GameFactoryTest {
 
         var display = new Display(new ConsoleWriter());
         var inputValidator = new InputValidator(bufferedReader, display);
-        var playerFactory = new PlayerFactory(display, inputValidator);
+        var minimax = new Minimax();
+        var playerFactory = new PlayerFactory(display, inputValidator, minimax);
         var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
         var board = new Board(grid);

@@ -2,7 +2,8 @@ package tictactoe;
 
 public enum PlayerTypes {
     HUMAN("h"),
-    COMPUTER("c");
+    COMPUTER("c"),
+    UNBEATABLE("uc");
 
     public final String type;
 

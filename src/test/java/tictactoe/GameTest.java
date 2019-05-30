@@ -119,7 +119,7 @@ class GameTest {
 
         var gameOutcome = game.outcome();
 
-        assertEquals("TIE", gameOutcome);
+        assertEquals("tie", gameOutcome);
     }
 
     @Test
