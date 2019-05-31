@@ -1,3 +1,5 @@
+package tictactoe;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -13,14 +15,14 @@ public class InputValidator {
     public int validateMove(Grid grid, String playersMark, boolean isValid) {
         display.humanPlayerMessages(grid, playersMark, isValid);
         var input = getInput();
-        return (input.matches("\\d+")) ? Integer.parseInt(input) : 0;
+        return (input.matches(ValidMove.DIGIT.move)) ? Integer.parseInt(input) : 0;
     }
 
     public String validatePlayerSelection(int playerNumber) {
         display.playerSelectionMessage(playerNumber);
         var input = getInput().toLowerCase();
 
-        while (!input.matches("h") && !input.matches("c")) {
+        while (!input.matches(PlayerTypes.HUMAN.type) && !input.matches(PlayerTypes.COMPUTER.type)) {
             display.invalidPlayerSelectionMessage();
             display.playerSelectionMessage(playerNumber);
 
@@ -46,15 +48,17 @@ public class InputValidator {
 
         try {
             input = bufferedReader.readLine();
-        } catch (IOException e) {
-            var consoleWriter = new ConsoleWriter();
-            consoleWriter.println("Trouble reading input: " + e);
+        } catch (IOException error) {
+            display.inputErrorMessage();
+            display.errorMessage(error);
         }
         return input;
     }
 
     private boolean isMarkSelectionInvalid(String input, String otherPlayersMark) {
-        return input.matches("\\d+") || input.matches(" ")
-                || input.matches("") || input.matches(otherPlayersMark);
+        return input.matches(InvalidPlayerMarks.DIGIT.mark)
+                || input.matches(InvalidPlayerMarks.WHITESPACE.mark)
+                || input.matches(InvalidPlayerMarks.EMPTY.mark)
+                || input.matches(otherPlayersMark);
     }
 }

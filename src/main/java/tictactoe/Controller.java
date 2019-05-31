@@ -1,3 +1,5 @@
+package tictactoe;
+
 public class Controller {
     private Game game;
     private final GameFactory gameFactory;

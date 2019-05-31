@@ -1,3 +1,5 @@
+package tictactoe;
+
 public class HumanPlayer implements Player {
     private final String mark;
     private final InputValidator inputValidator;

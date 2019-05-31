@@ -1,3 +1,5 @@
+package tictactoe;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -55,7 +57,7 @@ class InputValidatorTest {
 
     @Test
     void returnsUserInputIfItIsc() {
-        var simulatedInput = "c";
+        var simulatedInput = "c" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var display = new Display(new ConsoleWriter());
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));

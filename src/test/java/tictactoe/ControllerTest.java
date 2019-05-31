@@ -1,3 +1,5 @@
+package tictactoe;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
@@ -57,7 +59,7 @@ class ControllerTest {
         var gameFactory = new GameFactory(inputValidator, playerFactory, board);
 
         var controller = new Controller(gameFactory, display);
-        var expectedOutput = "It's a tie!\n";
+        var expectedOutput = "It's a TIE!\n";
 
         controller.playGame();
 

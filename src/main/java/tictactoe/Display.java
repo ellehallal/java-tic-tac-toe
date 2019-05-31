@@ -1,3 +1,7 @@
+package tictactoe;
+
+import java.io.IOException;
+
 public class Display {
     private final ConsoleWriter consoleWriter;
 
@@ -18,7 +22,7 @@ public class Display {
 
     public void outcomeMessage(String outcome) {
         clearScreen();
-        if (outcome.equals("tie")) {
+        if (outcome.equals("TIE")) {
             tieMessage();
         } else {
             winnerMessage(outcome);
@@ -39,12 +43,12 @@ public class Display {
 
     public void playerMarkMessage(int playerNumber) {
         clearScreen();
-        var output = "Please select player " + playerNumber + "'s mark:";
+        var output = "Please select player " + playerNumber + "'s move:";
         consoleWriter.println(output);
     }
 
     public void invalidPlayerMarkMessage() {
-        var output = "Invalid mark selection. Please try again.";
+        var output = "Invalid move selection. Please try again.";
         consoleWriter.println(output);
         pause(1500);
         clearScreen();
@@ -69,6 +73,15 @@ public class Display {
         makeMoveMessage();
     }
 
+    public void inputErrorMessage() {
+        var output = "Trouble reading input ";
+        consoleWriter.println(output);
+    }
+
+    public void errorMessage(IOException error) {
+        consoleWriter.println(error);
+    }
+
     private void pause(int milliSeconds) {
         try {
             Thread.sleep(milliSeconds);
@@ -78,7 +91,7 @@ public class Display {
     }
 
     private void tieMessage() {
-        var output = "It's a tie!\n";
+        var output = "It's a TIE!\n";
         consoleWriter.println(output);
     }
 
