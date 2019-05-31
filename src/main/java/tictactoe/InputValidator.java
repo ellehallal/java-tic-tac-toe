@@ -63,8 +63,8 @@ public class InputValidator {
     }
 
     private boolean isNotAValidPlayerType(String input) {
-        return (!input.matches(PlayerTypes.HUMAN.type)
-                && !input.matches(PlayerTypes.COMPUTER.type)
-                && !input.matches(PlayerTypes.UNBEATABLE.type));
+        return (!input.matches(PlayerTypes.human.toString())
+                && !input.matches(PlayerTypes.computer.toString())
+                && !input.matches(PlayerTypes.unbeatable.toString()));
     }
 }

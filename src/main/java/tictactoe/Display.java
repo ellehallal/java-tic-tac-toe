@@ -22,7 +22,7 @@ public class Display {
 
     public void outcomeMessage(String outcome) {
         clearScreen();
-        if (outcome.equals("tie")) {
+        if (outcome.equals(GameOutcome.tie.toString())) {
             tieMessage();
         } else {
             winnerMessage(outcome);
@@ -31,7 +31,7 @@ public class Display {
 
     public void playerSelectionMessage(int playerNumber) {
         clearScreen();
-        var output = "Please select player " + playerNumber + "\n(h = human, c = computer, uc = unbeatable computer):";
+        var output = "Please select player " + playerNumber + "\n(human, computer or unbeatable):";
         consoleWriter.println(output);
     }
 

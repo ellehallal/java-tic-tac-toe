@@ -13,9 +13,9 @@ public class PlayerFactory {
     }
 
     public Player createNewPlayer(String playerType, String mark) {
-        if (playerType.equals(PlayerTypes.HUMAN.type)) {
+        if (playerType.equals(PlayerTypes.human.toString())) {
             return new HumanPlayer(mark, inputValidator);
-        } else if (playerType.equals(PlayerTypes.COMPUTER.type)) {
+        } else if (playerType.equals(PlayerTypes.computer.toString())) {
             return new ComputerPlayer(display, mark);
         } else {
             return new UnbeatableComputerPlayer(display, mark, minimax);

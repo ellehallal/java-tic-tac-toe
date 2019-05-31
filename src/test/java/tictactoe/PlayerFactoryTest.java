@@ -18,7 +18,7 @@ class PlayerFactoryTest {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var newPlayer = playerFactory.createNewPlayer("h", "x");
+        var newPlayer = playerFactory.createNewPlayer("human", "x");
 
         var isHumanPlayer = newPlayer.getClass().equals(HumanPlayer.class);
 
@@ -33,7 +33,7 @@ class PlayerFactoryTest {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var newPlayer = playerFactory.createNewPlayer("c", "x");
+        var newPlayer = playerFactory.createNewPlayer("computer", "x");
 
         var isComputerPlayer = newPlayer.getClass().equals(ComputerPlayer.class);
 
@@ -48,7 +48,7 @@ class PlayerFactoryTest {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var newPlayer = playerFactory.createNewPlayer("u", "x");
+        var newPlayer = playerFactory.createNewPlayer("unbeatable", "x");
 
         var isUnbeatableComputerPlayer = newPlayer.getClass().equals(UnbeatableComputerPlayer.class);
 
