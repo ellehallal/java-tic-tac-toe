@@ -2,9 +2,10 @@ package tictactoe;
 
 import java.io.IOException;
 import java.io.PrintStream;
+import java.io.Serializable;
 
-public class ConsoleWriter {
-    private final PrintStream output;
+public class ConsoleWriter implements Serializable {
+    transient private final PrintStream output;
 
     public ConsoleWriter(PrintStream output) {
         this.output = output;

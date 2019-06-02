@@ -112,7 +112,6 @@ class DisplayTest {
         var grid = new Grid(squares);
 
         display.computerPlayerMessages(grid, "x");
-
         var outputString = output.toString();
 
         assertThat(outputString).contains("1 | 2 | 3\n");
@@ -131,7 +130,6 @@ class DisplayTest {
         var grid = new Grid(squares);
 
         display.humanPlayerMessages(grid, "o", true);
-
         var outputString = output.toString();
 
         assertThat(outputString).contains("o, it's your turn.\n");
@@ -148,7 +146,6 @@ class DisplayTest {
         var grid = new Grid(squares);
 
         display.humanPlayerMessages(grid, "o", false);
-
         var outputString = output.toString();
 
         assertThat(outputString).contains("Invalid move. Please try again, o.\n");
@@ -161,13 +158,77 @@ class DisplayTest {
         var output = new ByteArrayOutputStream();
         var consoleWriter = new ConsoleWriter(new PrintStream(output));
         var display = new Display(consoleWriter);
-        var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
-        var grid = new Grid(squares);
 
         display.inputErrorMessage();
-
         var outputString = output.toString();
 
         assertThat(outputString).contains("Trouble reading input \n");
+    }
+
+    @Test
+    void displaysSavingGameMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.savingGameMessage("great game");
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Please wait, saving 'great game'...\n");
+    }
+
+    @Test
+    void displaysGameSavedMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.gameSavedMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Your game is saved!\n");
+    }
+
+    @Test
+    void displaysInvalidGameNameMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.invalidGameNameMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Invalid game name entered. Please try again.\n");
+    }
+
+    @Test
+    void displaysGameNameExistsMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+        var expectedOutput = "An saved game called 'good game' already exists.\n" +
+                "Please try another name.\n";
+
+        display.gameNameExistsMessage("good game");
+        var outputString = output.toString();
+
+        assertThat(outputString).contains(expectedOutput);
+    }
+
+    @Test
+    void displaysGameNamePromptMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.gameNamePromptMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Please enter the game name: \n");
     }
 }

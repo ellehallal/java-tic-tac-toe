@@ -82,6 +82,35 @@ public class Display {
         consoleWriter.println(error);
     }
 
+    public void savingGameMessage(String gameName) {
+        var output = "Please wait, saving '" + gameName + "'...";
+        consoleWriter.println(output);
+        pause(1000);
+    }
+
+    public void gameSavedMessage() {
+        var output = "Your game is saved!";
+        consoleWriter.println(output);
+    }
+
+    public void invalidGameNameMessage() {
+        var output = "Invalid game name entered. Please try again.";
+        consoleWriter.println(output);
+        pause(2000);
+    }
+
+    public void gameNameExistsMessage(String gameName) {
+        var output = "An saved game called '" + gameName + "' already exists.\n" +
+                "Please try another name.";
+        consoleWriter.println(output);
+        pause(2000);
+    }
+
+    public void gameNamePromptMessage() {
+        var output = "Please enter the game name: ";
+        consoleWriter.println(output);
+    }
+
     private void pause(int milliSeconds) {
         try {
             Thread.sleep(milliSeconds);

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class UnbeatableComputerPlayerTest {
@@ -22,5 +23,17 @@ class UnbeatableComputerPlayerTest {
         var move = uComputerPlayer.chooseMove(board, "x");
 
         assertFalse(availableMoves.contains(move));
+    }
+
+    @Test
+    void returnsUnbeatableAsPlayersType() {
+        var consoleWriter = new ConsoleWriter();
+        var display = new Display(consoleWriter);
+        var minimax = new Minimax();
+        var unbeatablePlayer = new UnbeatableComputerPlayer(display, "x", minimax);
+
+        var playerType = unbeatablePlayer.getPlayerType();
+
+        assertEquals("unbeatable", playerType);
     }
 }

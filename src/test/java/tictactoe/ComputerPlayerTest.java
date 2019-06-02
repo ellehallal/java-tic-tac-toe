@@ -50,4 +50,15 @@ class ComputerPlayerTest {
 
         assertEquals("o", playersMark);
     }
+
+    @Test
+    void returnsComputerAsPlayersType() {
+        var consoleWriter = new ConsoleWriter();
+        var display = new Display(consoleWriter);
+        var computerPlayer = new ComputerPlayer(display, "x");
+
+        var playerType = computerPlayer.getPlayerType();
+
+        assertEquals("computer", playerType);
+    }
 }

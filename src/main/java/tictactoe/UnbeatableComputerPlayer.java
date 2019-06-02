@@ -4,6 +4,7 @@ public class UnbeatableComputerPlayer implements Player {
     private final Display display;
     private final String mark;
     private final Minimax minimax;
+    private final PlayerTypes playerType = PlayerTypes.unbeatable;
 
 
     public UnbeatableComputerPlayer(Display display, String mark, Minimax minimax) {
@@ -13,13 +14,18 @@ public class UnbeatableComputerPlayer implements Player {
     }
 
     @Override
-    public int chooseMove(Board board, String opponentMark) {
-        display.computerPlayerMessages(board.getGrid(), mark);
-        return minimax.chooseMove(board, mark, opponentMark);
+    public String getMark() {
+        return mark;
     }
 
     @Override
-    public String getMark() {
-        return mark;
+    public String getPlayerType() {
+        return playerType.toString();
+    }
+
+    @Override
+    public int chooseMove(Board board, String opponentMark) {
+        display.computerPlayerMessages(board.getGrid(), mark);
+        return minimax.chooseMove(board, mark, opponentMark);
     }
 }

@@ -1,9 +1,10 @@
 package tictactoe;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Board {
+public class Board implements Serializable {
     private final Grid grid;
 
     public Board(Grid grid) {

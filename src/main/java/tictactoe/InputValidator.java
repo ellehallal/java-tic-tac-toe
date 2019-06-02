@@ -15,8 +15,13 @@ public class InputValidator {
     public int validateMove(Grid grid, String playersMark, boolean isValid) {
         display.humanPlayerMessages(grid, playersMark, isValid);
         var input = getInput();
-        return (input.matches(ValidMove.DIGIT.move)) ? Integer.parseInt(input) : 0;
+        if (input.toLowerCase().matches(GameOptions.save.toString())) {
+            return -2;
+        } else {
+            return (input.matches(ValidMove.DIGIT.move)) ? Integer.parseInt(input) : 0;
+        }
     }
+
 
     public String validatePlayerSelection(int playerNumber) {
         display.playerSelectionMessage(playerNumber);
@@ -41,6 +46,18 @@ public class InputValidator {
             input = getInput();
         }
         return input;
+    }
+
+    public String validateGameNameSelection(GameSaver gameSaver) {
+        display.gameNamePromptMessage();
+        var input = getInput();
+
+        while (gameSaver.isGameNameInDatabase(input)) {
+            display.gameNameExistsMessage(input);
+            input = getInput();
+        }
+
+        return input.toLowerCase();
     }
 
     private String getInput() {

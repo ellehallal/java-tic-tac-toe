@@ -1,9 +1,10 @@
 package tictactoe;
 
 public class Game {
+    public final Board board;
+    public boolean saveGame = false;
     private Player currentPlayer;
     private Player opponent;
-    public final Board board;
     private final Player player1;
     private final Player player2;
 
@@ -23,10 +24,24 @@ public class Game {
         return opponent.getMark();
     }
 
+    public String currentPlayersType() {
+        return currentPlayer.getPlayerType();
+    }
+
+    public String opponentsType() {
+        return opponent.getPlayerType();
+    }
+
     public void playMove() {
         var move = currentPlayer.chooseMove(board, opponentsMark());
-        board.takeSquare(move, currentPlayersMark());
-        toggleCurrentPlayer();
+        switch (move) {
+            case -2:
+                saveGame = true;
+                break;
+            default:
+                board.takeSquare(move, currentPlayersMark());
+                toggleCurrentPlayer();
+        }
     }
 
     public boolean over() {
@@ -59,5 +74,4 @@ public class Game {
             opponent = player2;
         }
     }
-
 }

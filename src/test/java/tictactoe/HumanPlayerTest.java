@@ -91,4 +91,17 @@ class HumanPlayerTest {
 
         assertEquals(7, move);
     }
+
+    @Test
+    void returnsHumanAsPlayersType() {
+        var consoleWriter = new ConsoleWriter();
+        var display = new Display(consoleWriter);
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+        var humanPlayer = new HumanPlayer("x", inputValidator);
+
+        var playerType = humanPlayer.getPlayerType();
+
+        assertEquals("human", playerType);
+    }
 }

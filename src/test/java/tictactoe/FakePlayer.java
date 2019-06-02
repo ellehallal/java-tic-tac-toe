@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class FakePlayer implements Player {
     private final String mark;
+    private final String playerType = "fake";
 
     public FakePlayer(String mark) {
         this.mark = mark;
@@ -11,6 +12,11 @@ public class FakePlayer implements Player {
 
     public String getMark() {
         return mark;
+    }
+
+    @Override
+    public String getPlayerType() {
+        return playerType;
     }
 
     @Override

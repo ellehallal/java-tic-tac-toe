@@ -1,9 +1,10 @@
 package tictactoe;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grid {
+public class Grid implements Serializable {
 
     private final int[][] winningCombinations = {
             {0, 1, 2},

@@ -5,10 +5,21 @@ import java.util.Random;
 public class ComputerPlayer implements Player {
     private final Display display;
     private final String mark;
+    private final PlayerTypes playerType = PlayerTypes.computer;
 
     public ComputerPlayer(Display display, String mark) {
         this.display = display;
         this.mark = mark;
+    }
+
+    @Override
+    public String getMark() {
+        return mark;
+    }
+
+    @Override
+    public String getPlayerType() {
+        return playerType.toString();
     }
 
     @Override
@@ -20,10 +31,5 @@ public class ComputerPlayer implements Player {
         var move = availableSquares.get(rand.nextInt(availableSquares.size()));
 
         return Integer.parseInt(move);
-    }
-
-    @Override
-    public String getMark() {
-        return mark;
     }
 }
