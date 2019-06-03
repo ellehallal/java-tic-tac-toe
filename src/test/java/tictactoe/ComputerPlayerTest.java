@@ -39,4 +39,15 @@ class ComputerPlayerTest {
 
         assertEquals(9, move);
     }
+
+    @Test
+    void returnsPlayersMark() {
+        var consoleWriter = new ConsoleWriter();
+        var display = new Display(consoleWriter);
+        var computerPlayer = new ComputerPlayer(display, "o");
+
+        var playersMark = computerPlayer.getMark();
+
+        assertEquals("o", playersMark);
+    }
 }

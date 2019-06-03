@@ -20,4 +20,11 @@ class PlayerTypesTest {
         assertEquals("c", playerType);
     }
 
+    @Test
+    void returnsUromEnum() {
+        var playerType = PlayerTypes.UNBEATABLE.type;
+
+        assertEquals("uc", playerType);
+    }
+
 }

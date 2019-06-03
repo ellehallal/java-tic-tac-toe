@@ -10,6 +10,6 @@ class GameOutcomeTest {
     void returnsTieFromEnum() {
         var gameOutcome = GameOutcome.TIE.type;
 
-        assertEquals("TIE", gameOutcome);
+        assertEquals("tie", gameOutcome);
     }
 }

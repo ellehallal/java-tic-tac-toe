@@ -27,7 +27,8 @@ class ControllerTest {
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var playerFactory = new PlayerFactory(display, inputValidator);
+        var minimax = new Minimax();
+        var playerFactory = new PlayerFactory(display, inputValidator, minimax);
         var gameFactory = new GameFactory(inputValidator, playerFactory, board);
 
         var controller = new Controller(gameFactory, display);
@@ -55,11 +56,12 @@ class ControllerTest {
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var playerFactory = new PlayerFactory(display, inputValidator);
+        var minimax = new Minimax();
+        var playerFactory = new PlayerFactory(display, inputValidator, minimax);
         var gameFactory = new GameFactory(inputValidator, playerFactory, board);
 
         var controller = new Controller(gameFactory, display);
-        var expectedOutput = "It's a TIE!\n";
+        var expectedOutput = "It's a tie!\n";
 
         controller.playGame();
 

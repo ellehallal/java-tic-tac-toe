@@ -13,7 +13,8 @@ public class TicTacToe {
         var board = new Board(grid);
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
-        var playerFactory = new PlayerFactory(display, inputValidator);
+        var minimax = new Minimax();
+        var playerFactory = new PlayerFactory(display, inputValidator, minimax);
         var gameFactory = new GameFactory(inputValidator, playerFactory, board);
 
         var controller = new Controller(gameFactory, display);

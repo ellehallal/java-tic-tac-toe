@@ -69,6 +69,11 @@ public class Board {
                 .collect(Collectors.toList());
     }
 
+    public Board copyBoard() {
+        var copyGrid = grid.copyGrid();
+        return new Board(copyGrid);
+    }
+
     private boolean squareAvailable
             (int position, String player1Mark, String player2Mark) {
         var index = position - 1;

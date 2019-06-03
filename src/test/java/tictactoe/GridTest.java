@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class GridTest {
 
@@ -42,5 +43,19 @@ class GridTest {
         var grid = new Grid(squares);
 
         assertEquals(9, grid.getSize());
+    }
+
+    @Test
+    void returnsACopyOfGrid() {
+        var squares = Arrays.asList("x", "o", "x", "4", "o", "o", "7", "x", "x");
+        var grid = new Grid(squares);
+        var board = new Board(grid);
+
+        var copyOfGrid = grid.copyGrid();
+
+        assertNotEquals(grid, copyOfGrid);
+        assertEquals(grid.getSquares(), copyOfGrid.getSquares());
+
+        assertEquals(grid.getSquares(), copyOfGrid.getSquares());
     }
 }
