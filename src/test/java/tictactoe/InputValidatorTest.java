@@ -44,7 +44,7 @@ class InputValidatorTest {
 
     @Test
     void returnsUserInputIfItIsh() {
-        var simulatedInput = "h";
+        var simulatedInput = "human";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var display = new Display(new ConsoleWriter());
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -52,12 +52,12 @@ class InputValidatorTest {
 
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
-        assertEquals("h", playerSelection);
+        assertEquals(PlayerTypes.human.toString(), playerSelection);
     }
 
     @Test
     void returnsUserInputIfItIsc() {
-        var simulatedInput = "c" + System.getProperty("line.separator");
+        var simulatedInput = "computer" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var display = new Display(new ConsoleWriter());
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -65,13 +65,13 @@ class InputValidatorTest {
 
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
-        assertEquals("c", playerSelection);
+        assertEquals(PlayerTypes.computer.toString(), playerSelection);
     }
 
     @Test
     void ifInputIsNothOrcItIsNotReturned() {
         var simulatedInput = "3" + System.getProperty("line.separator")
-                + "h" + System.getProperty("line.separator");
+                + "human" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var display = new Display(new ConsoleWriter());
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -80,7 +80,35 @@ class InputValidatorTest {
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
         assertNotEquals("3", playerSelection);
-        assertEquals("h", playerSelection);
+        assertEquals(PlayerTypes.human.toString(), playerSelection);
+    }
+
+    @Test
+    void returnsUserInputIfItIsUnbeatable() {
+        var simulatedInput = "unbeatable" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var playerSelection = inputValidator.validatePlayerSelection(1);
+
+        assertEquals(PlayerTypes.unbeatable.toString(), playerSelection);
+    }
+
+    @Test
+    void ifInputIsNotUnbeatableItIsNotReturned() {
+        var simulatedInput = "3" + System.getProperty("line.separator")
+                + "unbeatable" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var playerSelection = inputValidator.validatePlayerSelection(1);
+
+        assertNotEquals("3", playerSelection);
+        assertEquals(PlayerTypes.unbeatable.toString(), playerSelection);
     }
 
     @Test

@@ -19,9 +19,9 @@ class ControllerTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var simulatedInput = "h" + System.getProperty("line.separator")
+        var simulatedInput = "human" + System.getProperty("line.separator")
                 + "x" + System.getProperty("line.separator")
-                + "h" + System.getProperty("line.separator")
+                + "human" + System.getProperty("line.separator")
                 + "o" + System.getProperty("line.separator")
                 + "3" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
@@ -49,9 +49,9 @@ class ControllerTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
 
-        var simulatedInput = "h" + System.getProperty("line.separator")
+        var simulatedInput = "human" + System.getProperty("line.separator")
                 + "x" + System.getProperty("line.separator")
-                + "c" + System.getProperty("line.separator")
+                + "computer" + System.getProperty("line.separator")
                 + "o" + System.getProperty("line.separator");
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));

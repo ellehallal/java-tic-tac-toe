@@ -9,10 +9,10 @@ public class Minimax {
             (Board board, String currentPlayersMark, String opponentsMark) {
 
         var copyBoard = board.copyBoard();
-        return findBestMove(copyBoard, 0, currentPlayersMark, opponentsMark);
+        return find_best_move(copyBoard, 0, currentPlayersMark, opponentsMark);
     }
 
-    private int findBestMove
+    private int find_best_move
             (Board board, int depth, String currentPlayersMark, String opponentsMark) {
         var movesAndScores = new HashMap<Integer, Integer>();
         var availableSquares = board.availableSquares(currentPlayersMark, opponentsMark);
@@ -28,7 +28,7 @@ public class Minimax {
             copyBoard.takeSquare(squareNum, currentPlayersMark);
 
             movesAndScores.put(squareNum,
-                    -1 * findBestMove(copyBoard, depth + 1, opponentsMark, currentPlayersMark));
+                    -1 * find_best_move(copyBoard, depth + 1, opponentsMark, currentPlayersMark));
         }
         return evaluateMove(depth, movesAndScores);
     }

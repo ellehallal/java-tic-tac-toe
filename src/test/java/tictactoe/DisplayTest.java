@@ -35,7 +35,7 @@ class DisplayTest {
         var consoleWriter = new ConsoleWriter(new PrintStream(output));
         var display = new Display(consoleWriter);
 
-        display.outcomeMessage("tie");
+        display.outcomeMessage(GameOutcome.tie.toString());
 
         assertEquals("It's a tie!\n\n", output.toString());
     }
@@ -63,7 +63,7 @@ class DisplayTest {
 
         display.playerSelectionMessage(1);
 
-        assertEquals("Please select player 1\n(h = human, c = computer, uc = unbeatable computer):\n", output.toString());
+        assertEquals("Please select player 1\n(human, computer or unbeatable):\n", output.toString());
     }
 
     @Test

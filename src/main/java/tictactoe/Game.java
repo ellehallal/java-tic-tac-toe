@@ -38,7 +38,7 @@ public class Game {
         if (board.winningLineExists(currentPlayersMark(), opponentsMark())) {
             return winner();
         } else {
-            return GameOutcome.TIE.type;
+            return GameOutcome.tie.toString();
         }
     }
 
