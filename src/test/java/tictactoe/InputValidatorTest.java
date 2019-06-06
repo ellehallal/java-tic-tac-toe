@@ -9,8 +9,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class InputValidatorTest {
     Database database = new Database();
@@ -248,4 +247,46 @@ class InputValidatorTest {
         assertThat(outputString).contains(expectedOutput);
         clearTable();
     }
+
+    @Test
+    void returnsTrueIfUserInputIsYes() {
+        var simulatedInput = "yes" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var continueGame = inputValidator.validateContinueGameSelection();
+
+        assertTrue(continueGame);
+    }
+
+    @Test
+    void returnsFalseIfUserInputIsNo() {
+        var simulatedInput = "no" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var continueGame = inputValidator.validateContinueGameSelection();
+
+        assertFalse(continueGame);
+    }
+
+    @Test
+    void promptsUserForInputIfItIsNotYesOrNo() {
+        var simulatedInput = "ok" + System.getProperty("line.separator") +
+                "yes" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var continueGame = inputValidator.validateContinueGameSelection();
+
+        assertTrue(continueGame);
+    }
+
+
 }

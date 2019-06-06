@@ -1,6 +1,6 @@
 package tictactoe;
 
 public enum GamePlayers {
-    CURRENTPLAYER,
-    OPPONENT
+    currentplayer,
+    opponent
 }

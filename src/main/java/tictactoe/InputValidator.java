@@ -60,6 +60,19 @@ public class InputValidator {
         return input.toLowerCase();
     }
 
+    public boolean validateContinueGameSelection() {
+        display.continuePlayingGameMessage();
+        var input = getInput().toLowerCase();
+
+        while (!input.matches(GameOptions.yes.toString()) && !input.matches(GameOptions.no.toString())) {
+            display.invalidContinuePlayingGameMessage();
+            display.continuePlayingGameMessage();
+            input = getInput().toLowerCase();
+        }
+
+        return input.matches(GameOptions.yes.toString());
+    }
+
     private String getInput() {
         var input = "";
 

@@ -231,4 +231,56 @@ class DisplayTest {
 
         assertThat(outputString).contains("Please enter the game name: \n");
     }
+
+    @Test
+    void displaysContinuePlayingGameMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.continuePlayingGameMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Resume the current game? Yes or No: \n");
+    }
+
+    @Test
+    void displaysInvalidContinuePlayingGameMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.invalidContinuePlayingGameMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Invalid option. Please try again.\n");
+    }
+
+    @Test
+    void displaysExitGameMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.exitGameMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Thanks for playing Tic Tac Toe!\n");
+    }
+
+    @Test
+    void displaysSaveGameReminderMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.saveGameReminderMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Type 'save' during your turn to save the current game.\n");
+    }
 }

@@ -2,6 +2,7 @@ package tictactoe;
 
 public class Controller {
     private Game game;
+    private boolean continueGame = true;
     private final GameFactory gameFactory;
     private final Display display;
     private final GameSaver gameSaver;
@@ -17,7 +18,19 @@ public class Controller {
 
     public void playGame() {
         game = createGame();
-        gameLoop(game);
+        display.saveGameReminderMessage();
+
+        while (continueGame) {
+            gameLoop(game);
+            saveGameOrShowOutcome();
+
+            if (!game.over()) {
+                resumeGameOrEndGame();
+            } else {
+                continueGame = false;
+                exitGame();
+            }
+        }
     }
 
     private Game createGame() {
@@ -25,12 +38,14 @@ public class Controller {
     }
 
     private void gameLoop(Game game) {
-        while (!game.over() && !game.saveGame) game.playMove();
-        saveGameOrShowOutcome();
+        while (!game.over() && !game.saveGame) {
+            game.playMove();
+        }
     }
 
     private void saveGameOrShowOutcome() {
         if (game.saveGame) {
+            game.saveGame = false;
             saveGame();
         } else {
             endOfGame();
@@ -48,5 +63,18 @@ public class Controller {
         gameSaver.saveGame(gameName, game);
         display.savingGameMessage(gameName);
         display.gameSavedMessage();
+    }
+
+    private void resumeGameOrEndGame() {
+        var input = inputValidator.validateContinueGameSelection();
+
+        if (!input) {
+            continueGame = false;
+            exitGame();
+        }
+    }
+
+    private void exitGame() {
+        display.exitGameMessage();
     }
 }

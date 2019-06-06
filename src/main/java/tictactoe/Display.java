@@ -83,6 +83,7 @@ public class Display {
     }
 
     public void savingGameMessage(String gameName) {
+        clearScreen();
         var output = "Please wait, saving '" + gameName + "'...";
         consoleWriter.println(output);
         pause(1000);
@@ -94,12 +95,14 @@ public class Display {
     }
 
     public void invalidGameNameMessage() {
+        clearScreen();
         var output = "Invalid game name entered. Please try again.";
         consoleWriter.println(output);
         pause(2000);
     }
 
     public void gameNameExistsMessage(String gameName) {
+        clearScreen();
         var output = "An saved game called '" + gameName + "' already exists.\n" +
                 "Please try another name.";
         consoleWriter.println(output);
@@ -107,8 +110,31 @@ public class Display {
     }
 
     public void gameNamePromptMessage() {
+        clearScreen();
         var output = "Please enter the game name: ";
         consoleWriter.println(output);
+    }
+
+    public void continuePlayingGameMessage() {
+        var output = "Resume the current game? Yes or No: ";
+        consoleWriter.println(output);
+    }
+
+    public void invalidContinuePlayingGameMessage() {
+        var output = "Invalid option. Please try again.";
+        consoleWriter.println(output);
+    }
+
+    public void exitGameMessage() {
+        var output = "Thanks for playing Tic Tac Toe!";
+        consoleWriter.println(output);
+    }
+
+    public void saveGameReminderMessage() {
+        clearScreen();
+        var output = "Type 'save' during your turn to save the current game.";
+        consoleWriter.println(output);
+        pause(2000);
     }
 
     private void pause(int milliSeconds) {

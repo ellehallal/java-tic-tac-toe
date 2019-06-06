@@ -1,5 +1,7 @@
 package tictactoe;
 
 public enum GameOptions {
-    save;
+    save,
+    yes,
+    no
 }

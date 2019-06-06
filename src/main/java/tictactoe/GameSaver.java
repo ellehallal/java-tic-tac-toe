@@ -63,7 +63,7 @@ public class GameSaver {
             while (results.next()) {
                 retrievedGameName = results.getString("game_name");
             }
-            return gameName.equals(retrievedGameName) ? true : false;
+            return gameName.equals(retrievedGameName);
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -72,10 +72,10 @@ public class GameSaver {
     }
 
     public ArrayList<String> getGameState(String gameName, Game game) {
-        var currentPlayersMark = getPlayersMark(GamePlayers.CURRENTPLAYER.toString(), game);
-        var currentPlayersType = getPlayerType(GamePlayers.CURRENTPLAYER.toString(), game);
-        var opponentsMark = getPlayersMark(GamePlayers.OPPONENT.toString(), game);
-        var opponentsType = getPlayerType(GamePlayers.OPPONENT.toString(), game);
+        var currentPlayersMark = getPlayersMark(GamePlayers.currentplayer.toString(), game);
+        var currentPlayersType = getPlayerType(GamePlayers.currentplayer.toString(), game);
+        var opponentsMark = getPlayersMark(GamePlayers.opponent.toString(), game);
+        var opponentsType = getPlayerType(GamePlayers.opponent.toString(), game);
 
         return new ArrayList<>
                 (Arrays.asList(gameName, currentPlayersMark, currentPlayersType, opponentsMark, opponentsType));
@@ -88,14 +88,12 @@ public class GameSaver {
     }
 
     private String getPlayersMark(String player, Game game) {
-        return player.matches(GamePlayers.CURRENTPLAYER.toString()) ?
+        return player.matches(GamePlayers.currentplayer.toString()) ?
                 game.currentPlayersMark() : game.opponentsMark();
     }
 
     private String getPlayerType(String player, Game game) {
-        return player.matches(GamePlayers.CURRENTPLAYER.toString()) ?
+        return player.matches(GamePlayers.currentplayer.toString()) ?
                 game.currentPlayersType() : game.opponentsType();
     }
-
-
 }
