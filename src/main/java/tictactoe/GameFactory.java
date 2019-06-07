@@ -1,13 +1,11 @@
 package tictactoe;
 
 public class GameFactory {
-    private final InputValidator inputValidator;
     private final PlayerFactory playerFactory;
     private final Board board;
 
     public GameFactory
-            (InputValidator inputValidator, PlayerFactory playerFactory, Board board) {
-        this.inputValidator = inputValidator;
+            (PlayerFactory playerFactory, Board board) {
         this.playerFactory = playerFactory;
         this.board = board;
     }

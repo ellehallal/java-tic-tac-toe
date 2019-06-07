@@ -49,7 +49,7 @@ class ControllerTest {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var gameFactory = new GameFactory(inputValidator, playerFactory, board);
+        var gameFactory = new GameFactory(playerFactory, board);
         var database = new Database();
         var connection = database.connect();
         var gameSaver = new GameSaver(connection);
@@ -81,7 +81,7 @@ class ControllerTest {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var gameFactory = new GameFactory(inputValidator, playerFactory, board);
+        var gameFactory = new GameFactory(playerFactory, board);
         var database = new Database();
         var connection = database.connect();
         var gameSaver = new GameSaver(connection);
@@ -118,7 +118,7 @@ class ControllerTest {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var gameFactory = new GameFactory(inputValidator, playerFactory, board);
+        var gameFactory = new GameFactory(playerFactory, board);
         var database = new Database();
         var connection = database.connect();
         var gameSaver = new GameSaver(connection);
@@ -158,7 +158,7 @@ class ControllerTest {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var gameFactory = new GameFactory(inputValidator, playerFactory, board);
+        var gameFactory = new GameFactory(playerFactory, board);
         var database = new Database();
         var connection = database.connect();
         var gameSaver = new GameSaver(connection);

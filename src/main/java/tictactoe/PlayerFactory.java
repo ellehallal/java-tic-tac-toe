@@ -28,7 +28,7 @@ public class PlayerFactory {
         return inputValidator.validatePlayerSelection(playerNumber);
     }
 
-    private Player createTypeOfPlayer(String playerType, String mark) {
+    public Player createTypeOfPlayer(String playerType, String mark) {
         if (playerType.equals(PlayerTypes.human.toString())) {
             return new HumanPlayer(mark, inputValidator);
         } else if (playerType.equals(PlayerTypes.computer.toString())) {

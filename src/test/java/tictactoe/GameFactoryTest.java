@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameFactoryTest {
     @Test
@@ -27,11 +28,15 @@ class GameFactoryTest {
         var squares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
         var board = new Board(grid);
-        var gameFactory = new GameFactory(inputValidator, playerFactory, board);
+        var gameFactory = new GameFactory(playerFactory, board);
 
         var newGame = gameFactory.createNewGame();
 
         assertThat(newGame).isInstanceOf(Game.class);
+        assertEquals("x", newGame.currentPlayersMark());
+        assertEquals(PlayerTypes.human.toString(), newGame.currentPlayersType());
+        assertEquals("o", newGame.opponentsMark());
+        assertEquals(PlayerTypes.computer.toString(), newGame.opponentsType());
     }
 
 }
