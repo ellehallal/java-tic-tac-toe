@@ -25,7 +25,7 @@ public class Controller {
             saveGameOrShowOutcome();
 
             if (!game.over()) {
-                resumeGameOrEndGame();
+                continueGameOrEndGame();
             } else {
                 continueGame = false;
                 exitGame();
@@ -34,7 +34,7 @@ public class Controller {
     }
 
     private Game createGame() {
-        return gameFactory.createGame();
+        return gameFactory.createNewGame();
     }
 
     private void gameLoop(Game game) {
@@ -65,7 +65,7 @@ public class Controller {
         display.gameSavedMessage();
     }
 
-    private void resumeGameOrEndGame() {
+    private void continueGameOrEndGame() {
         var input = inputValidator.validateContinueGameSelection();
 
         if (!input) {

@@ -29,7 +29,7 @@ class GameFactoryTest {
         var board = new Board(grid);
         var gameFactory = new GameFactory(inputValidator, playerFactory, board);
 
-        var newGame = gameFactory.createGame();
+        var newGame = gameFactory.createNewGame();
 
         assertThat(newGame).isInstanceOf(Game.class);
     }
