@@ -17,7 +17,7 @@ public class PlayerFactory {
         var playerType = getPlayerTypeFromUser(playerNumber);
         var mark = getPlayerMarkFromUser(playerNumber, otherPlayersMark);
 
-        return createTypeOfPlayer(playerType, mark);
+        return createTypeOfPlayer(mark, playerType);
     }
 
     private String getPlayerMarkFromUser(int playerNumber, String otherPlayersMark) {
@@ -28,7 +28,7 @@ public class PlayerFactory {
         return inputValidator.validatePlayerSelection(playerNumber);
     }
 
-    public Player createTypeOfPlayer(String playerType, String mark) {
+    public Player createTypeOfPlayer(String mark, String playerType) {
         if (playerType.equals(PlayerTypes.human.toString())) {
             return new HumanPlayer(mark, inputValidator);
         } else if (playerType.equals(PlayerTypes.computer.toString())) {

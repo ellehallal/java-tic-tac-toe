@@ -16,7 +16,7 @@ public class TicTacToe {
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var gameFactory = new GameFactory(playerFactory, board);
+        var gameFactory = new GameFactory(playerFactory);
         Database database = new Database();
         Connection connection = database.connect();
         GameSaver gameSaver = new GameSaver(connection);

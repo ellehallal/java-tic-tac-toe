@@ -34,7 +34,7 @@ public class Controller {
     }
 
     private Game createGame() {
-        return gameFactory.createNewGame();
+        return gameFactory.newGame();
     }
 
     private void gameLoop(Game game) {
