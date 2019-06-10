@@ -12,7 +12,23 @@ public class PlayerFactory {
         this.minimax = minimax;
     }
 
-    public Player createNewPlayer(String playerType, String mark) {
+    public Player createNewPlayer
+            (int playerNumber, String otherPlayersMark) {
+        var playerType = getPlayerTypeFromUser(playerNumber);
+        var mark = getPlayerMarkFromUser(playerNumber, otherPlayersMark);
+
+        return createTypeOfPlayer(mark, playerType);
+    }
+
+    private String getPlayerMarkFromUser(int playerNumber, String otherPlayersMark) {
+        return inputValidator.validateMarkSelection(playerNumber, otherPlayersMark);
+    }
+
+    private String getPlayerTypeFromUser(int playerNumber) {
+        return inputValidator.validatePlayerSelection(playerNumber);
+    }
+
+    public Player createTypeOfPlayer(String mark, String playerType) {
         if (playerType.equals(PlayerType.human.toString())) {
             return new HumanPlayer(mark, inputValidator);
         } else if (playerType.equals(PlayerType.computer.toString())) {
