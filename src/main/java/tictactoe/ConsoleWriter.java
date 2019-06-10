@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 public class ConsoleWriter {
-    private final PrintStream output;
+    transient private final PrintStream output;
 
     public ConsoleWriter(PrintStream output) {
         this.output = output;

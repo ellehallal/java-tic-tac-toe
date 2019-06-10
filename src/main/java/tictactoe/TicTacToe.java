@@ -1,7 +1,8 @@
-import tictactoe.*;
+package tictactoe;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.util.Arrays;
 
 public class TicTacToe {
@@ -16,8 +17,11 @@ public class TicTacToe {
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
         var gameFactory = new GameFactory(inputValidator, playerFactory, board);
+        Database database = new Database();
+        Connection connection = database.connect();
+        GameSaver gameSaver = new GameSaver(connection);
 
-        var controller = new Controller(gameFactory, display);
+        var controller = new Controller(gameFactory, display, gameSaver, inputValidator);
 
         controller.playGame();
     }

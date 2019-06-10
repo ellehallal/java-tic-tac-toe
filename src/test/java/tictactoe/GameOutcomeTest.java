@@ -8,7 +8,7 @@ class GameOutcomeTest {
 
     @Test
     void returnsTieFromEnum() {
-        var gameOutcome = GameOutcome.TIE.type;
+        var gameOutcome = GameOutcome.tie.toString();
 
         assertEquals("tie", gameOutcome);
     }
