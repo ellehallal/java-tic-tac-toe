@@ -3,7 +3,7 @@ package tictactoe;
 public class HumanPlayer implements Player {
     private final String mark;
     private final InputValidator inputValidator;
-    private final PlayerTypes playerType = PlayerTypes.human;
+    private final PlayerType playerType = PlayerType.human;
 
     public HumanPlayer
             (String mark, InputValidator inputValidator) {

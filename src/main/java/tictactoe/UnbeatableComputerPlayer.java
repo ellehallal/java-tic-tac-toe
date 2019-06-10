@@ -4,8 +4,7 @@ public class UnbeatableComputerPlayer implements Player {
     private final Display display;
     private final String mark;
     private final Minimax minimax;
-    private final PlayerTypes playerType = PlayerTypes.unbeatable;
-
+    private final PlayerType playerType = PlayerType.unbeatable;
 
     public UnbeatableComputerPlayer(Display display, String mark, Minimax minimax) {
         this.display = display;

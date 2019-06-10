@@ -42,8 +42,7 @@ public class Grid {
     }
 
     public Grid copyGrid() {
-        var squares = copySquares();
-        return new Grid(squares);
+        return new Grid(copySquares());
     }
 
     private List<String> copySquares() {

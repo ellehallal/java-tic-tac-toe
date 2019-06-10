@@ -1,13 +1,13 @@
 package tictactoe;
 
-public enum InvalidPlayerMarks {
+public enum InvalidPlayerMark {
     DIGIT("\\d+"),
     WHITESPACE(" "),
     EMPTY("");
 
     public final String mark;
 
-    InvalidPlayerMarks(String mark) {
+    InvalidPlayerMark(String mark) {
         this.mark = mark;
     }
 }

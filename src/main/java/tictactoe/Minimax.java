@@ -14,12 +14,13 @@ public class Minimax {
 
     private int find_best_move
             (Board board, int depth, String currentPlayersMark, String opponentsMark) {
-        var movesAndScores = new HashMap<Integer, Integer>();
-        var availableSquares = board.availableSquares(currentPlayersMark, opponentsMark);
 
         if (board.isComplete(currentPlayersMark, opponentsMark)) {
             return scoreMove(board, depth, currentPlayersMark, opponentsMark);
         }
+
+        var movesAndScores = new HashMap<Integer, Integer>();
+        var availableSquares = board.availableSquares(currentPlayersMark, opponentsMark);
 
         for (String square : availableSquares) {
             var squareNum = Integer.parseInt(square);
@@ -34,22 +35,41 @@ public class Minimax {
     }
 
 
-    public int maximisingPlayerBestMove(Map<Integer, Integer> scores) {
+    private int scoreMove
+            (Board board, int depth, String currentPlayersMark, String opponentsMark) {
+
+        if (board.isWinningPlayer(currentPlayersMark)) {
+            return 10 - depth;
+        } else if (board.isWinningPlayer(opponentsMark)) {
+            return depth - 10;
+        } else {
+            return 0;
+        }
+    }
+
+    private int evaluateMove(int depth, Map scores) {
+        return depth == 0 ? maximisingPlayerBestMove(scores) : maximisingPlayerBestScore(scores);
+    }
+
+
+    private int maximisingPlayerBestMove(Map<Integer, Integer> scores) {
         var entry = scores.entrySet().iterator().next();
         var bestMove = entry.getKey();
-        var bestScore = entry.getValue();
+        var bestScore = 0;
 
         for (Map.Entry<Integer, Integer> moveScore : scores.entrySet()) {
             var score = moveScore.getValue();
 
             if (score > bestScore) {
+                bestScore = score;
                 bestMove = moveScore.getKey();
             }
         }
+
         return bestMove;
     }
 
-    public int maximisingPlayerBestScore(Map<Integer, Integer> scores) {
+    private int maximisingPlayerBestScore(Map<Integer, Integer> scores) {
         var entry = scores.entrySet().iterator().next();
         var bestScore = entry.getValue();
 
@@ -63,19 +83,5 @@ public class Minimax {
         return bestScore;
     }
 
-    private int evaluateMove(int depth, Map scores) {
-        return depth == 0 ? maximisingPlayerBestMove(scores) : maximisingPlayerBestScore(scores);
-    }
 
-    private int scoreMove
-            (Board board, int depth, String currentPlayersMark, String opponentsMark) {
-
-        if (board.isWinningPlayer(currentPlayersMark)) {
-            return 10 - depth;
-        } else if (board.isWinningPlayer(opponentsMark)) {
-            return depth - 10;
-        } else {
-            return 0;
-        }
-    }
 }
