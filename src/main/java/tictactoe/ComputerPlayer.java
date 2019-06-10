@@ -5,7 +5,7 @@ import java.util.Random;
 public class ComputerPlayer implements Player {
     private final Display display;
     private final String mark;
-    private final PlayerTypes playerType = PlayerTypes.computer;
+    private final PlayerType playerType = PlayerType.computer;
 
     public ComputerPlayer(Display display, String mark) {
         this.display = display;

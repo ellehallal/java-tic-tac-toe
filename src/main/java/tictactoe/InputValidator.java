@@ -27,7 +27,7 @@ public class InputValidator {
         display.playerSelectionMessage(playerNumber);
         var input = getInput().toLowerCase();
 
-        while (isNotAValidPlayerType(input)) {
+        while (PlayerType.fromString(input) == PlayerType.invalid) {
             display.invalidPlayerSelectionMessage();
             display.playerSelectionMessage(playerNumber);
 
@@ -86,15 +86,9 @@ public class InputValidator {
     }
 
     private boolean isMarkSelectionInvalid(String input, String otherPlayersMark) {
-        return input.matches(InvalidPlayerMarks.DIGIT.mark)
-                || input.matches(InvalidPlayerMarks.WHITESPACE.mark)
-                || input.matches(InvalidPlayerMarks.EMPTY.mark)
+        return input.matches(InvalidPlayerMark.DIGIT.mark)
+                || input.matches(InvalidPlayerMark.WHITESPACE.mark)
+                || input.matches(InvalidPlayerMark.EMPTY.mark)
                 || input.matches(otherPlayersMark);
-    }
-
-    private boolean isNotAValidPlayerType(String input) {
-        return (!input.matches(PlayerTypes.human.toString())
-                && !input.matches(PlayerTypes.computer.toString())
-                && !input.matches(PlayerTypes.unbeatable.toString()));
     }
 }

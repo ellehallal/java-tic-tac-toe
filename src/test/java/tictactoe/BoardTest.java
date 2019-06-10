@@ -165,14 +165,14 @@ class BoardTest {
     }
 
     @Test
-    void returnsANewInstanceOfBoard() {
+    void returnsANewInstanceOfBoardWithCopyOfSquares() {
         var squares = Arrays.asList("x", "o", "x", "4", "o", "o", "7", "x", "x");
         var grid = new Grid(squares);
         var board = new Board(grid);
 
         var copyBoard = board.copyBoard();
 
-        assertNotEquals(board, copyBoard);
         assertThat(copyBoard).isInstanceOf(Board.class);
+        assertEquals(squares, board.getGrid().getSquares());
     }
 }

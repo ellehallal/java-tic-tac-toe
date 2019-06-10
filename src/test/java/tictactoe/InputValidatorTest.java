@@ -97,7 +97,7 @@ class InputValidatorTest {
 
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
-        assertEquals(PlayerTypes.human.toString(), playerSelection);
+        assertEquals(PlayerType.human.toString(), playerSelection);
     }
 
     @Test
@@ -110,7 +110,7 @@ class InputValidatorTest {
 
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
-        assertEquals(PlayerTypes.computer.toString(), playerSelection);
+        assertEquals(PlayerType.computer.toString(), playerSelection);
     }
 
     @Test
@@ -125,7 +125,7 @@ class InputValidatorTest {
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
         assertNotEquals("3", playerSelection);
-        assertEquals(PlayerTypes.human.toString(), playerSelection);
+        assertEquals(PlayerType.human.toString(), playerSelection);
     }
 
     @Test
@@ -138,7 +138,7 @@ class InputValidatorTest {
 
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
-        assertEquals(PlayerTypes.unbeatable.toString(), playerSelection);
+        assertEquals(PlayerType.unbeatable.toString(), playerSelection);
     }
 
     @Test
@@ -153,7 +153,7 @@ class InputValidatorTest {
         var playerSelection = inputValidator.validatePlayerSelection(1);
 
         assertNotEquals("3", playerSelection);
-        assertEquals(PlayerTypes.unbeatable.toString(), playerSelection);
+        assertEquals(PlayerType.unbeatable.toString(), playerSelection);
     }
 
     @Test

@@ -3,39 +3,11 @@ package tictactoe;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MinimaxTest {
 
-    @Test
-    void returns4AsBestMove() {
-        var scores = new HashMap<Integer, Integer>() {{
-            put(3, 1);
-            put(4, 2);
-            put(5, 0);
-        }};
-        var minimax = new Minimax();
-        var bestMove = minimax.maximisingPlayerBestMove(scores);
-
-        assertEquals(4, bestMove);
-
-    }
-
-    @Test
-    void returns2AsBestScore() {
-        var scores = new HashMap<Integer, Integer>() {{
-            put(3, 1);
-            put(4, 2);
-            put(5, 0);
-        }};
-        var minimax = new Minimax();
-        var bestScore = minimax.maximisingPlayerBestScore(scores);
-
-        assertEquals(2, bestScore);
-
-    }
 
     @Test
     void returns3AsTheBestMove() {
@@ -82,7 +54,7 @@ class MinimaxTest {
         var grid = new Grid(squares);
         var board = new Board(grid);
         var minimax = new Minimax();
-        var expectedMove = 8;
+        var expectedMove = 7;
 
         var bestMove = minimax.chooseMove(board, "x", "o");
 
