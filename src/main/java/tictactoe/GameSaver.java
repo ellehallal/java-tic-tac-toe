@@ -35,11 +35,8 @@ public class GameSaver {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             var squaresArray = connection.createArrayOf("text", squares);
 
-            preparedStatement.setString(1, gameState.get(0));
-            preparedStatement.setString(2, gameState.get(1));
-            preparedStatement.setString(3, gameState.get(2));
-            preparedStatement.setString(4, gameState.get(3));
-            preparedStatement.setString(5, gameState.get(4));
+            for (int x = 0; x <= gameState.size() - 1; x++)
+                preparedStatement.setString((x + 1), gameState.get(x));
             preparedStatement.setArray(6, squaresArray);
 
             preparedStatement.executeUpdate();
@@ -52,19 +49,8 @@ public class GameSaver {
     }
 
     public boolean isGameNameInDatabase(String gameName) {
-        var query = "SELECT * FROM saved_games WHERE game_name = ?";
-
         try {
-            var retrievedGameName = "";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, gameName);
-            preparedStatement.executeQuery();
-            var results = preparedStatement.getResultSet();
-            while (results.next()) {
-                retrievedGameName = results.getString("game_name");
-            }
-            return gameName.equals(retrievedGameName);
-
+            return doesGameNameExistInDatabase(gameName);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -95,5 +81,18 @@ public class GameSaver {
     private String getPlayerType(String player, Game game) {
         return player.matches(GamePlayers.currentplayer.toString()) ?
                 game.currentPlayersType() : game.opponentsType();
+    }
+
+    private boolean doesGameNameExistInDatabase(String gameName) throws SQLException {
+        var query = "SELECT * FROM saved_games WHERE game_name = ?";
+        var retrievedGameName = "";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, gameName);
+        preparedStatement.executeQuery();
+        var results = preparedStatement.getResultSet();
+        while (results.next()) {
+            retrievedGameName = results.getString("game_name");
+        }
+        return gameName.equals(retrievedGameName);
     }
 }
