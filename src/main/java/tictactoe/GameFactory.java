@@ -13,8 +13,8 @@ public class GameFactory {
     }
 
     public Game newGame() {
-        var player1 = playerFactory.createNewPlayer(1, "");
-        var player2 = playerFactory.createNewPlayer(2, player1.getMark());
+        var player1 = playerFactory.createNewPlayerFromUserInput(1, "");
+        var player2 = playerFactory.createNewPlayerFromUserInput(2, player1.getMark());
         var board = BoardFactory.newBoard(newBoardSquares);
 
         return new Game(board, player1, player2);
@@ -23,8 +23,8 @@ public class GameFactory {
     public Game existingGame(String currentPlayersMark, String currentPlayersType,
                              String opponentsMark, String opponentsType, List squares) {
 
-        var player1 = playerFactory.createTypeOfPlayer(currentPlayersMark, currentPlayersType);
-        var player2 = playerFactory.createTypeOfPlayer(opponentsMark, opponentsType);
+        var player1 = playerFactory.createPlayer(currentPlayersMark, currentPlayersType);
+        var player2 = playerFactory.createPlayer(opponentsMark, opponentsType);
         var board = BoardFactory.newBoard(squares);
 
         return new Game(board, player1, player2);

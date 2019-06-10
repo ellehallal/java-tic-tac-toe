@@ -31,13 +31,13 @@ class GameFactoryTest {
 
         assertThat(newGame).isInstanceOf(Game.class);
         assertEquals("x", newGame.currentPlayersMark());
-        assertEquals(PlayerTypes.human.toString(), newGame.currentPlayersType());
+        assertEquals(PlayerType.human.toString(), newGame.currentPlayersType());
         assertEquals("o", newGame.opponentsMark());
-        assertEquals(PlayerTypes.computer.toString(), newGame.opponentsType());
+        assertEquals(PlayerType.computer.toString(), newGame.opponentsType());
     }
 
     @Test
-    void createsANewInstanceOfGameWithPlayerInformationAndSquares() {
+    void createsANewInstanceOfGameWithExistingInformation() {
         var display = new Display(new ConsoleWriter());
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
@@ -51,9 +51,9 @@ class GameFactoryTest {
 
         assertThat(existingGame).isInstanceOf(Game.class);
         assertEquals("x", existingGame.currentPlayersMark());
-        assertEquals(PlayerTypes.human.toString(), existingGame.currentPlayersType());
+        assertEquals(PlayerType.human.toString(), existingGame.currentPlayersType());
         assertEquals("o", existingGame.opponentsMark());
-        assertEquals(PlayerTypes.computer.toString(), existingGame.opponentsType());
+        assertEquals(PlayerType.computer.toString(), existingGame.opponentsType());
         assertEquals(squares, existingGame.board.getGrid().getSquares());
     }
 

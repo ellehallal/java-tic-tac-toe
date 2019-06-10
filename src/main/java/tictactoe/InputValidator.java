@@ -15,7 +15,7 @@ public class InputValidator {
     public int validateMove(Grid grid, String playersMark, boolean isValid) {
         display.humanPlayerMessages(grid, playersMark, isValid);
         var input = getInput();
-        if (input.toLowerCase().matches(GameOptions.save.toString())) {
+        if (input.toLowerCase().matches(GameOption.save.toString())) {
             return -2;
         } else {
             return (input.matches(ValidMove.DIGIT.move)) ? Integer.parseInt(input) : 0;
@@ -23,7 +23,7 @@ public class InputValidator {
     }
 
 
-    public String validatePlayerSelection(int playerNumber) {
+    public String validatePlayerTypeSelection(int playerNumber) {
         display.playerSelectionMessage(playerNumber);
         var input = getInput().toLowerCase();
 
@@ -48,7 +48,7 @@ public class InputValidator {
         return input;
     }
 
-    public String validateGameNameSelection(GameSaver gameSaver) {
+    public String validateGameNameDoesNotExist(GameSaver gameSaver) {
         display.gameNamePromptMessage();
         var input = getInput();
 
@@ -60,17 +60,42 @@ public class InputValidator {
         return input.toLowerCase();
     }
 
+    public String validateGameNameExists(GameSaver gameSaver) {
+        display.gameNamePromptMessage();
+        var input = getInput();
+
+        while (!gameSaver.isGameNameInDatabase(input)) {
+            display.gameNameDoesNotExistMessage(input);
+            input = getInput();
+        }
+
+        return input.toLowerCase();
+    }
+
     public boolean validateContinueGameSelection() {
         display.continuePlayingGameMessage();
         var input = getInput().toLowerCase();
 
-        while (!input.matches(GameOptions.yes.toString()) && !input.matches(GameOptions.no.toString())) {
+        while (!input.matches(GameOption.yes.toString()) && !input.matches(GameOption.no.toString())) {
             display.invalidContinuePlayingGameMessage();
             display.continuePlayingGameMessage();
             input = getInput().toLowerCase();
         }
 
-        return input.matches(GameOptions.yes.toString());
+        return input.matches(GameOption.yes.toString());
+    }
+
+    public String validateGameOptionSelection() {
+        display.newOrExistingGameMessage();
+        var input = getInput().toLowerCase();
+
+        while (GameOption.fromString(input).equals(GameOption.invalid)) {
+            display.invalidGameOptionMessage();
+            display.newOrExistingGameMessage();
+
+            input = getInput();
+        }
+        return input;
     }
 
     private String getInput() {

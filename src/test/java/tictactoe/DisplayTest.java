@@ -283,4 +283,43 @@ class DisplayTest {
 
         assertThat(outputString).contains("Type 'save' during your turn to save the current game.\n");
     }
+
+    @Test
+    void displaysNewOrExistingGameMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.newOrExistingGameMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Enter 'start' to start a new game, or 'existing' to load a saved game:\n");
+    }
+
+    @Test
+    void displaysGameNameDoesNotExistMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.gameNameDoesNotExistMessage("bad game");
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("'bad game' does not exist. Please try again.\n");
+    }
+
+    @Test
+    void displaysInvalidGameOptionMessage() {
+
+        var output = new ByteArrayOutputStream();
+        var consoleWriter = new ConsoleWriter(new PrintStream(output));
+        var display = new Display(consoleWriter);
+
+        display.invalidGameOptionMessage();
+        var outputString = output.toString();
+
+        assertThat(outputString).contains("Invalid option entered. Please try again.\n");
+    }
 }

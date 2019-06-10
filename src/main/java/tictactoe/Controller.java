@@ -1,23 +1,27 @@
 package tictactoe;
 
+import java.sql.SQLException;
+
 public class Controller {
     private Game game;
     private boolean continueGame = true;
     private final GameFactory gameFactory;
     private final Display display;
     private final GameSaver gameSaver;
+    private final GameLoader gameLoader;
     private final InputValidator inputValidator;
 
     public Controller(GameFactory gameFactory, Display display,
-                      GameSaver gameSaver, InputValidator inputValidator) {
+                      GameSaver gameSaver, GameLoader gameLoader, InputValidator inputValidator) {
         this.gameFactory = gameFactory;
         this.display = display;
         this.gameSaver = gameSaver;
+        this.gameLoader = gameLoader;
         this.inputValidator = inputValidator;
     }
 
-    public void playGame() {
-        game = createGame();
+    public void playGame() throws SQLException {
+        game = GameManager.newOrExistingGame(inputValidator, gameFactory, gameLoader, gameSaver);
         display.saveGameReminderMessage();
 
         while (continueGame) {
@@ -31,10 +35,6 @@ public class Controller {
                 exitGame();
             }
         }
-    }
-
-    private Game createGame() {
-        return gameFactory.newGame();
     }
 
     private void gameLoop(Game game) {
@@ -59,7 +59,7 @@ public class Controller {
     }
 
     private void saveGame() {
-        var gameName = inputValidator.validateGameNameSelection(gameSaver);
+        var gameName = inputValidator.validateGameNameDoesNotExist(gameSaver);
         gameSaver.saveGame(gameName, game);
         display.savingGameMessage(gameName);
         display.gameSavedMessage();

@@ -11,15 +11,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GameSaverTest {
-    Database database = new Database();
-    Connection connection = database.connect();
-    GameSaver gameSaver = new GameSaver(connection);
+
+    Connection connectionSetup() {
+        Database database = new Database();
+        return database.connect();
+    }
+
+    GameSaver gameSaversetup() {
+        return new GameSaver(connectionSetup());
+    }
 
     void clearTable() {
         var query = "DELETE FROM saved_games";
 
         try {
-            var conn = database.connect();
+            var conn = connectionSetup();
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -33,6 +39,7 @@ class GameSaverTest {
     @Test
     void savesGameToDatabase() {
         clearTable();
+        var gameSaver = gameSaversetup();
         var squares = Arrays.asList("x", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
         var board = new Board(grid);
@@ -48,6 +55,7 @@ class GameSaverTest {
 
     @Test
     void savesGameStateMinusSquaresToAnArrayList() {
+        var gameSaver = gameSaversetup();
         var squares = Arrays.asList("x", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
         var board = new Board(grid);
@@ -66,6 +74,7 @@ class GameSaverTest {
 
     @Test
     void savesSquaresAsAStringArray() {
+        var gameSaver = gameSaversetup();
         var squares = Arrays.asList("x", "2", "3", "4", "5", "6", "7", "8", "9");
         var grid = new Grid(squares);
         var board = new Board(grid);
