@@ -3,6 +3,7 @@ package tictactoe;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,13 +13,15 @@ class PlayerFactoryTest {
 
     @Test
     void createsAHumanPlayer() {
-        var consoleWriter = new ConsoleWriter();
-        var display = new Display(consoleWriter);
+        var display = new Display(new ConsoleWriter());
+        var simulatedInput = "human" + System.getProperty("line.separator")
+                + "x" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var newPlayer = playerFactory.createNewPlayer("human", "x");
+        var newPlayer = playerFactory.createNewPlayerFromUserInput(1, "");
 
         var isHumanPlayer = newPlayer.getClass().equals(HumanPlayer.class);
 
@@ -27,13 +30,15 @@ class PlayerFactoryTest {
 
     @Test
     void createsAComputerPlayer() {
-        var consoleWriter = new ConsoleWriter();
-        var display = new Display(consoleWriter);
+        var display = new Display(new ConsoleWriter());
+        var simulatedInput = "computer" + System.getProperty("line.separator")
+                + "x" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var newPlayer = playerFactory.createNewPlayer("computer", "x");
+        var newPlayer = playerFactory.createNewPlayerFromUserInput(1, "");
 
         var isComputerPlayer = newPlayer.getClass().equals(ComputerPlayer.class);
 
@@ -42,13 +47,15 @@ class PlayerFactoryTest {
 
     @Test
     void createsAnUnbeatableComputerPlayer() {
-        var consoleWriter = new ConsoleWriter();
-        var display = new Display(consoleWriter);
+        var display = new Display(new ConsoleWriter());
+        var simulatedInput = "unbeatable" + System.getProperty("line.separator")
+                + "x" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
         var minimax = new Minimax();
         var playerFactory = new PlayerFactory(display, inputValidator, minimax);
-        var newPlayer = playerFactory.createNewPlayer("unbeatable", "x");
+        var newPlayer = playerFactory.createNewPlayerFromUserInput(1, "");
 
         var isUnbeatableComputerPlayer = newPlayer.getClass().equals(UnbeatableComputerPlayer.class);
 

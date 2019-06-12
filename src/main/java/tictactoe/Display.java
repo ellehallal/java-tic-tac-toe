@@ -137,6 +137,27 @@ public class Display {
         pause(2000);
     }
 
+    public void newOrExistingGameMessage() {
+        clearScreen();
+        var output = "Enter 'start' to start a new game, or 'existing' to load a saved game:";
+        consoleWriter.println(output);
+        pause(2000);
+    }
+
+    public void gameNameDoesNotExistMessage(String gameName) {
+        clearScreen();
+        var output = "'" + gameName + "' does not exist. Please try again.";
+        consoleWriter.println(output);
+        pause(2000);
+    }
+
+    public void invalidGameOptionMessage() {
+        clearScreen();
+        var output = "Invalid option entered. Please try again.";
+        consoleWriter.println(output);
+        pause(2000);
+    }
+
     private void pause(int milliSeconds) {
         try {
             Thread.sleep(milliSeconds);

@@ -1,27 +1,32 @@
 package tictactoe;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class GameFactory {
-    private final InputValidator inputValidator;
     private final PlayerFactory playerFactory;
-    private final Board board;
+    private final List newBoardSquares = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
 
     public GameFactory
-            (InputValidator inputValidator, PlayerFactory playerFactory, Board board) {
-        this.inputValidator = inputValidator;
+            (PlayerFactory playerFactory) {
         this.playerFactory = playerFactory;
-        this.board = board;
     }
 
-    public Game createGame() {
-        var player1 = createPlayer(1, "");
-        var player2 = createPlayer(2, player1.getMark());
+    public Game newGame() {
+        var player1 = playerFactory.createNewPlayerFromUserInput(1, "");
+        var player2 = playerFactory.createNewPlayerFromUserInput(2, player1.getMark());
+        var board = BoardFactory.newBoard(newBoardSquares);
 
         return new Game(board, player1, player2);
     }
 
-    private Player createPlayer(int playerNumber, String otherPlayersMark) {
-        var playerType = inputValidator.validatePlayerSelection(playerNumber);
-        var playerMark = inputValidator.validateMarkSelection(playerNumber, otherPlayersMark);
-        return playerFactory.createNewPlayer(playerType, playerMark);
+    public Game existingGame(String currentPlayersMark, String currentPlayersType,
+                             String opponentsMark, String opponentsType, List squares) {
+
+        var player1 = playerFactory.createPlayer(currentPlayersMark, currentPlayersType);
+        var player2 = playerFactory.createPlayer(opponentsMark, opponentsType);
+        var board = BoardFactory.newBoard(squares);
+
+        return new Game(board, player1, player2);
     }
 }

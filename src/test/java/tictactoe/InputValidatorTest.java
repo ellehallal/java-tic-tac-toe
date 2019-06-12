@@ -12,16 +12,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InputValidatorTest {
-    Database database = new Database();
-    Connection connection = database.connect();
-    GameSaver gameSaver = new GameSaver(connection);
+    GameSaver gameSaver = new GameSaver(databaseConnection());
+
+    Connection databaseConnection() {
+        var database = new Database();
+        return database.connect();
+    }
+
+    void addGameToDatabase() {
+        var gameSaver = new GameSaver(databaseConnection());
+
+        var squares = Arrays.asList("x", "2", "3", "4", "5", "6", "7", "8", "9");
+        var grid = new Grid(squares);
+        var board = new Board(grid);
+        var player1 = new FakePlayer("x");
+        var player2 = new FakePlayer("o");
+        var game = new Game(board, player1, player2);
+
+        gameSaver.saveGame("good game", game);
+    }
 
     void clearTable() {
         var query = "DELETE FROM saved_games";
 
         try {
-            var conn = database.connect();
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            var connection = databaseConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
             preparedStatement.close();
             System.out.println("Table cleared successfully");
@@ -95,7 +111,7 @@ class InputValidatorTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
 
-        var playerSelection = inputValidator.validatePlayerSelection(1);
+        var playerSelection = inputValidator.validatePlayerTypeSelection(1);
 
         assertEquals(PlayerType.human.toString(), playerSelection);
     }
@@ -108,7 +124,7 @@ class InputValidatorTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
 
-        var playerSelection = inputValidator.validatePlayerSelection(1);
+        var playerSelection = inputValidator.validatePlayerTypeSelection(1);
 
         assertEquals(PlayerType.computer.toString(), playerSelection);
     }
@@ -122,7 +138,7 @@ class InputValidatorTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
 
-        var playerSelection = inputValidator.validatePlayerSelection(1);
+        var playerSelection = inputValidator.validatePlayerTypeSelection(1);
 
         assertNotEquals("3", playerSelection);
         assertEquals(PlayerType.human.toString(), playerSelection);
@@ -136,7 +152,7 @@ class InputValidatorTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
 
-        var playerSelection = inputValidator.validatePlayerSelection(1);
+        var playerSelection = inputValidator.validatePlayerTypeSelection(1);
 
         assertEquals(PlayerType.unbeatable.toString(), playerSelection);
     }
@@ -150,7 +166,7 @@ class InputValidatorTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
 
-        var playerSelection = inputValidator.validatePlayerSelection(1);
+        var playerSelection = inputValidator.validatePlayerTypeSelection(1);
 
         assertNotEquals("3", playerSelection);
         assertEquals(PlayerType.unbeatable.toString(), playerSelection);
@@ -221,7 +237,7 @@ class InputValidatorTest {
         var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         var inputValidator = new InputValidator(bufferedReader, display);
 
-        var gameName = inputValidator.validateGameNameSelection(gameSaver);
+        var gameName = inputValidator.validateGameNameDoesNotExist(gameSaver);
 
         assertEquals("bad game", gameName);
     }
@@ -241,7 +257,7 @@ class InputValidatorTest {
         var expectedOutput = "An saved game called 'excellent game' already exists.\n" +
                 "Please try another name.\n";
 
-        inputValidator.validateGameNameSelection(gameSaver);
+        inputValidator.validateGameNameDoesNotExist(gameSaver);
         var outputString = output.toString();
 
         assertThat(outputString).contains(expectedOutput);
@@ -286,6 +302,77 @@ class InputValidatorTest {
         var continueGame = inputValidator.validateContinueGameSelection();
 
         assertTrue(continueGame);
+    }
+
+    @Test
+    void returnsInputIfItIsStart() {
+        var simulatedInput = "start" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var newOrExisting = inputValidator.validateGameOptionSelection();
+
+        assertEquals(GameOption.start.toString(), newOrExisting);
+    }
+
+    @Test
+    void returnsInputIfItIsExisting() {
+        var simulatedInput = "existing" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var newOrExisting = inputValidator.validateGameOptionSelection();
+
+        assertEquals(GameOption.existing.toString(), newOrExisting);
+    }
+
+    @Test
+    void promptsForInputAgainIfItIsNotStartOrExisting() {
+        var simulatedInput = "something else" + System.getProperty("line.separator")
+                + "existing" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var newOrExisting = inputValidator.validateGameOptionSelection();
+
+        assertEquals(GameOption.existing.toString(), newOrExisting);
+    }
+
+    @Test
+    void returnsInputIfGameNameExistsInTable() {
+        clearTable();
+        addGameToDatabase();
+        var simulatedInput = "good game" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var gameName = inputValidator.validateGameNameExists(gameSaver);
+
+        assertEquals("good game", gameName);
+    }
+
+    @Test
+    void promptsForInputAgainIfGameNameDoesNotExistInTable() {
+        clearTable();
+        addGameToDatabase();
+        var simulatedInput = "bad game" + System.getProperty("line.separator")
+                + "good game" + System.getProperty("line.separator");
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        var display = new Display(new ConsoleWriter());
+        var bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        var inputValidator = new InputValidator(bufferedReader, display);
+
+        var gameName = inputValidator.validateGameNameExists(gameSaver);
+
+        assertEquals("good game", gameName);
     }
 
 
