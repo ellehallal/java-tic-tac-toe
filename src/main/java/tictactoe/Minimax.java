@@ -1,7 +1,9 @@
 package tictactoe;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Minimax {
 
@@ -28,7 +30,8 @@ public class Minimax {
 
             copyBoard.takeSquare(squareNum, currentPlayersMark);
 
-            var score = - 1 * find_best_move(copyBoard, depth + 1, opponentsMark, currentPlayersMark);
+            var score = - 1 * find_best_move(copyBoard, depth + 1,
+                    opponentsMark, currentPlayersMark);
 
             movesAndScores.add(new MoveAndScoreResult(squareNum, score));
         }
@@ -52,32 +55,19 @@ public class Minimax {
 
 
     private int maximisingPlayerBestMove(List<MoveAndScoreResult> movesAndScores) {
-        var bestMove = 0;
-        var bestScore = -10;
-
-        for (MoveAndScoreResult result : movesAndScores) {
-            var score = result.getScore();
-
-            if(score > bestScore) {
-                bestScore = score;
-                bestMove = result.getMove();
-            }
-        }
-
-        return bestMove;
+        return movesAndScores
+                .stream()
+                .max(Comparator.comparing(MoveAndScoreResult::getScore))
+                .orElseThrow(NoSuchElementException::new)
+                .getMove();
     }
 
     private int maximisingPlayerBestScore(List<MoveAndScoreResult> movesAndScores) {
-        var bestScore = -10;
-
-        for (MoveAndScoreResult result : movesAndScores) {
-            var score = result.getScore();
-
-            if(score > bestScore) {
-                bestScore = score;
-            }
-        }
-        return bestScore;
+        return movesAndScores
+                .stream()
+                .max(Comparator.comparing(MoveAndScoreResult::getScore))
+                .orElseThrow(NoSuchElementException::new)
+                .getScore();
     }
 
     class MoveAndScoreResult {
