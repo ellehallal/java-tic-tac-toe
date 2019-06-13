@@ -1,7 +1,9 @@
 package tictactoe;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 public class Minimax {
 
@@ -19,7 +21,7 @@ public class Minimax {
             return scoreMove(board, depth, currentPlayersMark, opponentsMark);
         }
 
-        var movesAndScores = new HashMap<Integer, Integer>();
+        var movesAndScores = new ArrayList<MoveAndScoreResult>();
         var availableSquares = board.availableSquares(currentPlayersMark, opponentsMark);
 
         for (String square : availableSquares) {
@@ -28,8 +30,10 @@ public class Minimax {
 
             copyBoard.takeSquare(squareNum, currentPlayersMark);
 
-            movesAndScores.put(squareNum,
-                    -1 * find_best_move(copyBoard, depth + 1, opponentsMark, currentPlayersMark));
+            var score = - 1 * find_best_move(copyBoard, depth + 1,
+                    opponentsMark, currentPlayersMark);
+
+            movesAndScores.add(new MoveAndScoreResult(squareNum, score));
         }
         return evaluateMove(depth, movesAndScores);
     }
@@ -38,50 +42,49 @@ public class Minimax {
     private int scoreMove
             (Board board, int depth, String currentPlayersMark, String opponentsMark) {
 
-        if (board.isWinningPlayer(currentPlayersMark)) {
-            return 10 - depth;
-        } else if (board.isWinningPlayer(opponentsMark)) {
+        if (board.winningLineExists(currentPlayersMark, opponentsMark)) {
             return depth - 10;
         } else {
             return 0;
         }
     }
 
-    private int evaluateMove(int depth, Map scores) {
-        return depth == 0 ? maximisingPlayerBestMove(scores) : maximisingPlayerBestScore(scores);
+    private int evaluateMove(int depth, List<MoveAndScoreResult> movesAndScores) {
+        return depth == 0 ? maximisingPlayerBestMove(movesAndScores) : maximisingPlayerBestScore(movesAndScores);
     }
 
 
-    private int maximisingPlayerBestMove(Map<Integer, Integer> scores) {
-        var entry = scores.entrySet().iterator().next();
-        var bestMove = entry.getKey();
-        var bestScore = 0;
+    private int maximisingPlayerBestMove(List<MoveAndScoreResult> movesAndScores) {
+        return movesAndScores
+                .stream()
+                .max(Comparator.comparing(MoveAndScoreResult::getScore))
+                .orElseThrow(NoSuchElementException::new)
+                .getMove();
+    }
 
-        for (Map.Entry<Integer, Integer> moveScore : scores.entrySet()) {
-            var score = moveScore.getValue();
+    private int maximisingPlayerBestScore(List<MoveAndScoreResult> movesAndScores) {
+        return movesAndScores
+                .stream()
+                .max(Comparator.comparing(MoveAndScoreResult::getScore))
+                .orElseThrow(NoSuchElementException::new)
+                .getScore();
+    }
 
-            if (score > bestScore) {
-                bestScore = score;
-                bestMove = moveScore.getKey();
-            }
+    class MoveAndScoreResult {
+        private final int move;
+        private final int score;
+
+        public MoveAndScoreResult(int move, int score) {
+            this.move = move;
+            this.score = score;
         }
 
-        return bestMove;
-    }
-
-    private int maximisingPlayerBestScore(Map<Integer, Integer> scores) {
-        var entry = scores.entrySet().iterator().next();
-        var bestScore = entry.getValue();
-
-        for (Map.Entry<Integer, Integer> moveScore : scores.entrySet()) {
-            var score = moveScore.getValue();
-
-            if (score > bestScore) {
-                bestScore = moveScore.getValue();
-            }
+        public int getMove() {
+            return move;
         }
-        return bestScore;
+
+        public int getScore() {
+            return score;
+        }
     }
-
-
 }

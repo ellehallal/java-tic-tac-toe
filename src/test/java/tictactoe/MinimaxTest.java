@@ -87,4 +87,17 @@ class MinimaxTest {
         assertEquals(expectedMove, bestMove);
     }
 
+    @Test
+    void returns6AsTheBestMove() {
+        var squares = Arrays.asList("o", "x", "3", "x", "x", "6", "o", "o", "x");
+        var grid = new Grid(squares);
+        var board = new Board(grid);
+        var minimax = new Minimax();
+        var expectedMove = 6;
+
+        var bestMove = minimax.chooseMove(board, "x", "o");
+
+        assertEquals(expectedMove, bestMove);
+    }
+
 }
