@@ -1,7 +1,7 @@
 package tictactoe;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Minimax {
 
@@ -19,7 +19,7 @@ public class Minimax {
             return scoreMove(board, depth, currentPlayersMark, opponentsMark);
         }
 
-        var movesAndScores = new HashMap<Integer, Integer>();
+        var movesAndScores = new ArrayList<MoveAndScoreResult>();
         var availableSquares = board.availableSquares(currentPlayersMark, opponentsMark);
 
         for (String square : availableSquares) {
@@ -28,8 +28,9 @@ public class Minimax {
 
             copyBoard.takeSquare(squareNum, currentPlayersMark);
 
-            movesAndScores.put(squareNum,
-                    -1 * find_best_move(copyBoard, depth + 1, opponentsMark, currentPlayersMark));
+            var score = - 1 * find_best_move(copyBoard, depth + 1, opponentsMark, currentPlayersMark);
+
+            movesAndScores.add(new MoveAndScoreResult(squareNum, score));
         }
         return evaluateMove(depth, movesAndScores);
     }
@@ -47,41 +48,55 @@ public class Minimax {
         }
     }
 
-    private int evaluateMove(int depth, Map scores) {
-        return depth == 0 ? maximisingPlayerBestMove(scores) : maximisingPlayerBestScore(scores);
+    private int evaluateMove(int depth, List<MoveAndScoreResult> movesAndScores) {
+        return depth == 0 ? maximisingPlayerBestMove(movesAndScores) : maximisingPlayerBestScore(movesAndScores);
     }
 
 
-    private int maximisingPlayerBestMove(Map<Integer, Integer> scores) {
-        var entry = scores.entrySet().iterator().next();
-        var bestMove = entry.getKey();
-        var bestScore = 0;
+    private int maximisingPlayerBestMove(List<MoveAndScoreResult> movesAndScores) {
+        var bestMove = 0;
+        var bestScore = -10;
 
-        for (Map.Entry<Integer, Integer> moveScore : scores.entrySet()) {
-            var score = moveScore.getValue();
+        for (MoveAndScoreResult result : movesAndScores) {
+            var score = result.getScore();
 
-            if (score > bestScore) {
+            if(score > bestScore) {
                 bestScore = score;
-                bestMove = moveScore.getKey();
+                bestMove = result.getMove();
             }
         }
 
         return bestMove;
     }
 
-    private int maximisingPlayerBestScore(Map<Integer, Integer> scores) {
-        var entry = scores.entrySet().iterator().next();
-        var bestScore = entry.getValue();
+    private int maximisingPlayerBestScore(List<MoveAndScoreResult> movesAndScores) {
+        var bestScore = -10;
 
-        for (Map.Entry<Integer, Integer> moveScore : scores.entrySet()) {
-            var score = moveScore.getValue();
+        for (MoveAndScoreResult result : movesAndScores) {
+            var score = result.getScore();
 
-            if (score > bestScore) {
-                bestScore = moveScore.getValue();
+            if(score > bestScore) {
+                bestScore = score;
             }
         }
         return bestScore;
     }
 
+    class MoveAndScoreResult {
+        private final int move;
+        private final int score;
 
+        public MoveAndScoreResult(int move, int score) {
+            this.move = move;
+            this.score = score;
+        }
+
+        public int getMove() {
+            return move;
+        }
+
+        public int getScore() {
+            return score;
+        }
+    }
 }
