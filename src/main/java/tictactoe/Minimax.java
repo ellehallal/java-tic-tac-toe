@@ -39,9 +39,7 @@ public class Minimax {
     private int scoreMove
             (Board board, int depth, String currentPlayersMark, String opponentsMark) {
 
-        if (board.isWinningPlayer(currentPlayersMark)) {
-            return 10 - depth;
-        } else if (board.isWinningPlayer(opponentsMark)) {
+        if (board.winningLineExists(currentPlayersMark, opponentsMark)) {
             return depth - 10;
         } else {
             return 0;
