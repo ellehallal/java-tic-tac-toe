@@ -30,8 +30,8 @@
     - Unbeatable Computer vs Human
     - Unbeatable Computer vs Computer
     - Unbeatable Computer vs Unbeatable Computer
-- Save during the game
-- Resume a game
+- Save the game state to a database during the game
+- Resume a saved game
 
 ## Getting Started
 
@@ -42,8 +42,18 @@
 git clone https://github.com/itsellej/ruby-tic-tac-toe
 cd java_tic_tac_toe
 mvn package
-java -jar target/java-tic-tac-toe-1.0-SNAPSHOT.jar
+// Note: add database url, username and password
+java -DDBURL=url -DDBUSERNAME=username -DDBPASSWORD=password -jar target/java-tic-tac-toe-1.0-SNAPSHOT.jar
  ```
+ 
+Note: to save and retrieve games, a PostgreSQL database, with a table called "saved_games" will need to exist with the following columns set to `not null`:
+- id: integer (primary key)
+- game_name: text
+- current_player_mark: text
+- current_player_type: text
+- opponent_mark: text
+- opponent_type: text
+- squares: text[]
 
 ## Language 
 
