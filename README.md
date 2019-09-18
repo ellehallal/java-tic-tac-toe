@@ -39,8 +39,8 @@
 - [Install Maven, version 3.6.1](https://maven.apache.org/download.cgi)
 
  ```
-git clone https://github.com/itsellej/ruby-tic-tac-toe
-cd java_tic_tac_toe
+git clone https://github.com/itsellej/java-tic-tac-toe
+cd java-tic-tac-toe
 mvn package
 // Note: add database url, username and password
 java -DDBURL=url -DDBUSERNAME=username -DDBPASSWORD=password -jar target/java-tic-tac-toe-1.0-SNAPSHOT.jar
